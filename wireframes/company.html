@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要 | BRAIDEA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; line-height: 1.8; }
+    .wf-note { background: #FFFDE7; border: 2px dashed #FFC107; padding: 12px 24px; font-size: 13px; color: #795548; text-align: center; position: sticky; top: 0; z-index: 9999; }
+
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 48px; background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(8px); border-bottom: 1px solid #eee;
+      margin-top: 38px;
+    }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 28px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 22px; border-radius: 6px; font-weight: 600; }
+
+    /* HERO */
+    .page-hero {
+      padding: 160px 48px 80px;
+      background: linear-gradient(160deg, #f8f9fa 0%, #fff 100%);
+      border-bottom: 1px solid #eee;
+    }
+    .page-hero .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+    .page-hero .breadcrumb a { color: #aaa; text-decoration: none; }
+    .page-hero h1 { font-size: 40px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
+    .page-hero .lead { font-size: 17px; color: #666; max-width: 640px; line-height: 1.9; }
+
+    /* SECTION COMMON */
+    .section { padding: 100px 48px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #4a6cf7; margin-bottom: 12px; font-weight: 600; }
+    .section-title { font-size: 32px; font-weight: 700; color: #1a1a2e; margin-bottom: 40px; line-height: 1.4; }
+
+    /* MISSION / VISION */
+    .mv-section { background: #1a1a2e; padding: 100px 48px; color: #fff; text-align: center; }
+    .mv-inner { max-width: 800px; margin: 0 auto; }
+    .mv-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .mv-title { font-size: 13px; letter-spacing: 3px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .mv-text { font-size: 28px; font-weight: 700; line-height: 1.6; margin-bottom: 60px; }
+    .mv-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 60px; text-align: left; }
+    .mv-card { background: rgba(255,255,255,0.07); border-radius: 12px; padding: 32px 28px; }
+    .mv-card .tag { font-size: 11px; letter-spacing: 3px; color: rgba(255,255,255,0.4); margin-bottom: 12px; }
+    .mv-card h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.4; }
+    .mv-card p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.8; }
+
+    /* COMPANY TABLE */
+    .company-table { width: 100%; border-collapse: collapse; }
+    .company-table tr { border-bottom: 1px solid #f0f0f0; }
+    .company-table tr:first-child { border-top: 1px solid #f0f0f0; }
+    .company-table th {
+      width: 200px; padding: 24px 20px; font-size: 14px; font-weight: 600;
+      color: #1a1a2e; text-align: left; vertical-align: top;
+      background: #f8f9fa;
+    }
+    .company-table td { padding: 24px 20px; font-size: 15px; color: #555; vertical-align: top; line-height: 1.8; }
+
+    /* CEO */
+    .ceo-section { background: #f8f9fa; }
+    .ceo-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; gap: 60px; align-items: start; }
+    .ceo-photo { background: #ddd; border-radius: 12px; height: 320px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 14px; border: 2px dashed #ccc; }
+    .ceo-name { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .ceo-name-en { font-size: 14px; color: #aaa; letter-spacing: 2px; margin-bottom: 24px; }
+    .ceo-title { display: inline-block; background: #1a1a2e; color: #fff; font-size: 12px; padding: 6px 16px; border-radius: 20px; margin-bottom: 24px; }
+    .ceo-bio { font-size: 15px; color: #555; line-height: 1.9; }
+    .ceo-bio p { margin-bottom: 16px; }
+
+    /* VALUES */
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .value-card { padding: 32px 28px; border-radius: 12px; border: 1px solid #eee; }
+    .value-num { font-size: 12px; font-weight: 700; color: #4a6cf7; letter-spacing: 2px; margin-bottom: 12px; }
+    .value-card h3 { font-size: 18px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .value-card p { font-size: 14px; color: #777; line-height: 1.7; }
+
+    /* MAP */
+    .map-section { background: #f8f9fa; }
+    .map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .map-placeholder { background: #e8e8e8; border-radius: 12px; height: 320px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 14px; border: 2px dashed #ccc; }
+    .map-info h3 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 24px; }
+    .map-info-item { display: flex; gap: 12px; margin-bottom: 20px; align-items: flex-start; }
+    .map-info-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .map-info-item h4 { font-size: 13px; font-weight: 600; color: #aaa; margin-bottom: 4px; }
+    .map-info-item p { font-size: 15px; color: #333; }
+    .btn-map { display: inline-block; margin-top: 24px; background: #1a1a2e; color: #fff; padding: 14px 32px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; }
+
+    /* CTA */
+    .cta-block { background: #1a1a2e; padding: 80px 48px; text-align: center; color: #fff; }
+    .cta-block h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .cta-block p { font-size: 16px; opacity: 0.7; margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { display: inline-block; background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
+    .btn-ghost { display: inline-block; border: 2px solid rgba(255,255,255,0.5); color: #fff; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+
+    footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    footer .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+
+    @media (max-width: 768px) {
+      header { padding: 12px 20px; } nav a { display: none; }
+      .page-hero { padding: 120px 20px 60px; } .page-hero h1 { font-size: 28px; }
+      .section { padding: 60px 20px; }
+      .mv-cards, .values-grid, .map-grid { grid-template-columns: 1fr; }
+      .ceo-inner { grid-template-columns: 1fr; }
+      .mv-section { padding: 60px 20px; }
+      .company-table th { width: 120px; padding: 16px 12px; font-size: 13px; }
+      .company-table td { padding: 16px 12px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wf-note"><strong>WIREFRAME</strong> — 会社概要ページ / BRAIDEA リニューアル</div>
+
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス</a>
+    <a href="#">支援実績</a>
+    <a href="#">資料ダウンロード</a>
+    <a href="#" style="color:#1a1a2e; font-weight:700;">会社情報</a>
+    <a href="#contact" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="breadcrumb"><a href="top.html">TOP</a> &gt; 会社概要</p>
+  <h1>会社概要</h1>
+  <p class="lead">
+    2014年創業。事業成長にコミットする、伴走型マーケティングカンパニー。<br>
+    デジタルマーケティングを手段に、クライアントの課題解決と事業グロースを支援します。
+  </p>
+</div>
+
+<!-- MISSION / VISION -->
+<section class="mv-section">
+  <div class="mv-inner">
+    <div class="mv-label">OUR MISSION</div>
+    <p class="mv-title">MISSION</p>
+    <p class="mv-text">
+      「マーケティングの力で、<br>すべての事業成長を加速させる。」
+    </p>
+    <p style="font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.9; max-width: 600px; margin: 0 auto;">
+      マーケティングは、手段です。<br>
+      私たちは手段を売るのではなく、クライアントの事業課題・目標から逆算して戦略を立て、成果が出るまで伴走します。
+    </p>
+    <div class="mv-cards">
+      <div class="mv-card">
+        <div class="tag">VISION</div>
+        <h3>デジタルマーケティングで、日本企業の競争力を高める</h3>
+        <p>LLMO・AI・データ活用など、変化の速いデジタル領域で常に最先端の支援を提供し続けます。</p>
+      </div>
+      <div class="mv-card">
+        <div class="tag">VALUE</div>
+        <h3>成果へのコミット。伴走という姿勢。</h3>
+        <p>「外注先」ではなく、クライアントのチームの一員として機能する。その姿勢がBRAIDEAの根幹です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPANY INFO TABLE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">COMPANY INFO</div>
+    <h2 class="section-title">会社情報</h2>
+    <table class="company-table">
+      <tr>
+        <th>会社名</th>
+        <td>株式会社ブレイディア（BRAIDEA Inc.）</td>
+      </tr>
+      <tr>
+        <th>代表取締役</th>
+        <td>山川 祐矢（やまかわ ゆうや）</td>
+      </tr>
+      <tr>
+        <th>設立</th>
+        <td>2014年11月11日</td>
+      </tr>
+      <tr>
+        <th>所在地</th>
+        <td>〒103-0024<br>東京都中央区日本橋小舟町8-6</td>
+      </tr>
+      <tr>
+        <th>事業内容</th>
+        <td>
+          ・総合マーケティング伴走支援<br>
+          ・デジタル集客（運用型広告 / リスティング広告 / SNS広告）<br>
+          ・サイト改善（LLMO / SEO / コンテンツマーケティング）<br>
+          ・LPO / UI・UXデザイン / アクセス解析 / 生成AI導入支援
+        </td>
+      </tr>
+      <tr>
+        <th>主要取引先</th>
+        <td>※ 掲載可能な企業名を記載予定</td>
+      </tr>
+      <tr>
+        <th>URL</th>
+        <td>https://www.braidea.com</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- CEO -->
+<section class="section ceo-section">
+  <div class="ceo-inner">
+    <div class="ceo-photo">代表者写真<br>（差し替え予定）</div>
+    <div>
+      <div class="ceo-title">代表取締役</div>
+      <p class="ceo-name">山川 祐矢</p>
+      <p class="ceo-name-en">YAMAKAWA YUYA</p>
+      <div class="ceo-bio">
+        <p>
+          IT系ベンチャー企業に入社後、シンガポール関連会社へ出向。シンガポールにて日系2社（株式会社ADDIX・株式会社TMC）による合弁会社の代表取締役に就任し、東南アジア市場でのデジタルマーケティング支援を展開。
+        </p>
+        <p>
+          2013年11月に代表職を退任し帰国。2014年11月、株式会社ブレイディアを設立し代表取締役に就任。
+        </p>
+        <p>
+          創業以来、デジタルマーケティングを軸とした事業成長支援に従事。2025年より総合マーケティング伴走・LLMO/SEO・生成AI導入支援を中心としたサービス体制へと転換し、法人クライアントの成果創出にコミットしている。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">OUR VALUES</div>
+    <h2 class="section-title">私たちが大切にしていること</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">VALUE 01</div>
+        <h3>目標から逆算する</h3>
+        <p>手段や施策から入らない。クライアントのKGI・KPIを起点に、課題解決への最短ルートを設計します。</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">VALUE 02</div>
+        <h3>成果が出るまで手を離さない</h3>
+        <p>「提案して終わり」ではなく、実行・検証・改善まで一貫して伴走します。コミット力がBRAIDEAの強みです。</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">VALUE 03</div>
+        <h3>専門性を妥協しない</h3>
+        <p>広告・SEO・UX・AIなど各領域で専門性を持つプロフェッショナルが担当。専門外の施策をあいまいに行いません。</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">VALUE 04</div>
+        <h3>データを根拠にする</h3>
+        <p>感覚や経験則だけに頼らず、データと数値に基づいた意思決定と改善サイクルを回し続けます。</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">VALUE 05</div>
+        <h3>クライアントの自走を支援する</h3>
+        <p>依存関係ではなく、クライアントが自走できる組織・ノウハウの構築まで見据えた伴走を行います。</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">VALUE 06</div>
+        <h3>変化に対応し続ける</h3>
+        <p>LLMO・生成AIなど、マーケティングの変化スピードは加速しています。常に最新の知識と手法で支援します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP / ACCESS -->
+<section class="section map-section">
+  <div class="section-inner">
+    <div class="section-label">ACCESS</div>
+    <h2 class="section-title">アクセス</h2>
+    <div class="map-grid">
+      <div class="map-placeholder">
+        Google マップ埋め込みエリア<br>
+        （実装時に差し替え）
+      </div>
+      <div class="map-info">
+        <h3>株式会社ブレイディア</h3>
+        <div class="map-info-item">
+          <div class="map-info-icon">📍</div>
+          <div>
+            <h4>所在地</h4>
+            <p>〒103-0024<br>東京都中央区日本橋小舟町8-6</p>
+          </div>
+        </div>
+        <div class="map-info-item">
+          <div class="map-info-icon">🚉</div>
+          <div>
+            <h4>最寄り駅</h4>
+            <p>東京メトロ 日本橋駅 徒歩○分<br>※ 実際の経路に差し替えてください</p>
+          </div>
+        </div>
+        <div class="map-info-item">
+          <div class="map-info-icon">📞</div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <p>フォームよりご連絡ください</p>
+          </div>
+        </div>
+        <a href="#contact" class="btn-map">お問い合わせフォームへ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-block" id="contact">
+  <h2>BRAIDEAと一緒に、事業成長を加速しませんか</h2>
+  <p>まずは無料でご相談ください。</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-white">お問い合わせ</a>
+    <a href="#" class="btn-ghost">資料ダウンロード</a>
+  </div>
+</div>
+
+<footer>
+  <div>
+    <div class="footer-logo">BRAIDEA</div>
+    <p style="margin-top: 8px;">© 2025 株式会社ブレイディア All rights reserved.</p>
+  </div>
+  <div>
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">会社概要</a>
+  </div>
+</footer>
+
+</body>
+</html>
