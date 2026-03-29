@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デジタル集客 | BRAIDEA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; line-height: 1.8; }
+    .wf-note { background: #FFFDE7; border: 2px dashed #FFC107; padding: 12px 24px; font-size: 13px; color: #795548; text-align: center; position: sticky; top: 0; z-index: 9999; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; margin-top: 38px; }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 28px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 22px; border-radius: 6px; font-weight: 600; }
+    .page-hero { padding: 160px 48px 100px; background: linear-gradient(160deg, #f8f9fa 0%, #fff 100%); border-bottom: 1px solid #eee; }
+    .page-hero .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+    .page-hero .breadcrumb a { color: #aaa; text-decoration: none; }
+    .page-hero .service-tag { display: inline-block; background: #1a1a2e; color: #fff; font-size: 11px; letter-spacing: 3px; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
+    .page-hero h1 { font-size: 42px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; line-height: 1.3; }
+    .page-hero .sub { font-size: 18px; color: #888; margin-bottom: 20px; }
+    .page-hero .lead { font-size: 17px; color: #555; max-width: 700px; line-height: 1.9; margin-bottom: 40px; }
+    .hero-cta-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: #1a1a2e; color: #fff; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    .btn-outline { display: inline-block; border: 2px solid #1a1a2e; color: #1a1a2e; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    .numbers-bar { background: #1a1a2e; padding: 40px 48px; display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; }
+    .number-item { text-align: center; color: #fff; }
+    .number-item .num { font-size: 40px; font-weight: 700; background: linear-gradient(135deg, #667eea, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+    .number-item .label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+    .section { padding: 100px 48px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #4a6cf7; margin-bottom: 12px; font-weight: 600; }
+    .section-title { font-size: 32px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; line-height: 1.4; }
+    .section-text { font-size: 16px; color: #555; line-height: 1.9; }
+    .challenges { background: #f8f9fa; }
+    .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .challenge-card { background: #fff; border-radius: 12px; padding: 32px 24px; border-left: 4px solid #1a1a2e; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .challenge-card h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; line-height: 1.5; }
+    .challenge-card p { font-size: 13px; color: #888; line-height: 1.7; }
+
+    /* CHANNELS */
+    .channels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .channel-card { border: 1px solid #eee; border-radius: 12px; padding: 28px 24px; text-align: center; transition: box-shadow 0.2s, transform 0.2s; }
+    .channel-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .channel-logo { font-size: 28px; margin-bottom: 12px; }
+    .channel-card h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+    .channel-card p { font-size: 13px; color: #888; line-height: 1.6; }
+    .channel-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 12px; }
+    .channel-tags span { background: #f0f4ff; color: #4a6cf7; font-size: 11px; padding: 3px 10px; border-radius: 20px; }
+
+    /* PROCESS */
+    .process-steps { margin-top: 48px; display: flex; flex-direction: column; gap: 4px; }
+    .process-step { display: flex; gap: 24px; align-items: flex-start; padding: 28px 32px; background: #f8f9fa; border-radius: 10px; }
+    .process-num { width: 48px; height: 48px; background: #1a1a2e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+    .process-content h4 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+    .process-content p { font-size: 14px; color: #666; line-height: 1.7; }
+    .process-arrow { text-align: center; color: #ccc; font-size: 20px; padding: 4px 0; }
+
+    .features { background: #f8f9fa; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .feature-card { background: #fff; border-radius: 12px; padding: 36px 28px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .feature-icon { font-size: 36px; margin-bottom: 16px; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .feature-card p { font-size: 14px; color: #777; line-height: 1.7; }
+
+    /* CASE */
+    .case-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .case-card { background: #f8f9fa; border-radius: 12px; padding: 28px 24px; }
+    .case-card .tag { font-size: 11px; background: #1a1a2e; color: #fff; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 16px; }
+    .case-card h4 { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .case-result { font-size: 28px; font-weight: 700; color: #4a6cf7; }
+    .case-result small { font-size: 13px; color: #888; font-weight: 400; display: block; margin-top: 4px; }
+
+    .faq { background: #f8f9fa; }
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+    .faq-item { background: #fff; border-radius: 10px; padding: 28px 32px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+    .faq-q { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start; }
+    .faq-q::before { content: "Q"; background: #1a1a2e; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .faq-a { font-size: 14px; color: #666; line-height: 1.8; padding-left: 36px; }
+    .cta-block { background: #1a1a2e; padding: 80px 48px; text-align: center; color: #fff; }
+    .cta-block h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .cta-block p { font-size: 16px; opacity: 0.7; margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { display: inline-block; background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
+    .btn-ghost { display: inline-block; border: 2px solid rgba(255,255,255,0.5); color: #fff; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    footer .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    @media (max-width: 768px) {
+      header { padding: 12px 20px; } nav a { display: none; }
+      .page-hero { padding: 120px 20px 60px; } .page-hero h1 { font-size: 28px; }
+      .section { padding: 60px 20px; }
+      .challenge-grid, .features-grid, .channels-grid, .case-grid { grid-template-columns: 1fr; }
+      .numbers-bar { gap: 40px; padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wf-note"><strong>WIREFRAME</strong> — SERVICE 02 詳細ページ / デジタル集客 / BRAIDEA</div>
+
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス一覧</a>
+    <a href="#">支援実績</a>
+    <a href="#">資料ダウンロード</a>
+    <a href="#">会社情報</a>
+    <a href="#cta" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="top.html">TOP</a> &gt; <a href="services.html">サービス</a> &gt; デジタル集客</p>
+  <div class="service-tag">SERVICE 02</div>
+  <h1>デジタル集客</h1>
+  <p class="sub">運用型広告 / リスティング広告 / SNS広告</p>
+  <p class="lead">
+    広告費を「かけている」から「効かせている」へ。<br>
+    Google・Meta・LINEなどの主要媒体を横断的に最適化し、KGIから逆算した集客戦略を設計・実行します。
+  </p>
+  <div class="hero-cta-wrap">
+    <a href="#cta" class="btn-primary">無料相談はこちら</a>
+    <a href="#" class="btn-outline">資料ダウンロード</a>
+  </div>
+</div>
+
+<div class="numbers-bar">
+  <div class="number-item"><span class="num">1/4</span><div class="label">新規獲得コスト削減実績</div></div>
+  <div class="number-item"><span class="num">3倍</span><div class="label">投資対効果改善実績</div></div>
+  <div class="number-item"><span class="num">5+</span><div class="label">対応媒体数</div></div>
+  <div class="number-item"><span class="num">95%</span><div class="label">継続率</div></div>
+</div>
+
+<section class="section challenges">
+  <div class="section-inner">
+    <div class="section-label">CHALLENGES</div>
+    <h2 class="section-title">こんな課題はありませんか？</h2>
+    <p class="section-text">広告費をかけているのに成果が見えない。その原因は、運用の質と戦略設計にあることがほとんどです。</p>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <h3>広告費は使っているが、ROASが把握できていない</h3>
+        <p>レポートを受け取るだけで、何が効いているかわからない。投資判断の根拠が持てない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>代理店に任せきりで、改善提案が来ない</h3>
+        <p>毎月同じレポートが届くだけ。戦略的なPDCAが回っていない状態が続いている。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>BtoBリードを広告で獲得したい</h3>
+        <p>認知はあるが問い合わせにつながらない。リスティング・SNS広告でのリード獲得を強化したい。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>複数媒体を個別管理しており非効率</h3>
+        <p>Google・Meta・LINEをそれぞれ別の担当・代理店が管理しており、チャネル横断の最適化ができていない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>広告運用をインハウス化したい</h3>
+        <p>社内でノウハウを蓄積し、代理店依存から脱却したい。教育・体制構築の方法がわからない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>クリエイティブが陳腐化しており効果が落ちている</h3>
+        <p>同じバナーを使い続けており、CTR・CVRが低下。改善サイクルが回っていない。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">CHANNELS</div>
+    <h2 class="section-title">対応媒体・チャネル</h2>
+    <p class="section-text">KGI・KPI設計からチャネルの最適化・施策実行まで、最適な投資アロケーションを設計します。</p>
+    <div class="channels-grid">
+      <div class="channel-card">
+        <div class="channel-logo">🔍</div>
+        <h3>Google広告</h3>
+        <p>検索意図に直結した高精度なターゲティング</p>
+        <div class="channel-tags"><span>検索広告</span><span>ディスプレイ</span><span>P-MAX</span><span>YouTube</span></div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-logo">📱</div>
+        <h3>Meta広告</h3>
+        <p>詳細なターゲティングで潜在層にリーチ</p>
+        <div class="channel-tags"><span>Facebook</span><span>Instagram</span><span>リターゲティング</span></div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-logo">💬</div>
+        <h3>LINE広告</h3>
+        <p>国内最大のメッセージアプリで幅広くアプローチ</p>
+        <div class="channel-tags"><span>タイムライン</span><span>トークリスト</span></div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-logo">🐦</div>
+        <h3>X（Twitter）広告</h3>
+        <p>リアルタイム性の高い情報拡散とリード獲得</p>
+        <div class="channel-tags"><span>プロモーション</span><span>リード獲得</span></div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-logo">🎵</div>
+        <h3>TikTok広告</h3>
+        <p>動画フォーマットで若年層・新規顧客にリーチ</p>
+        <div class="channel-tags"><span>インフィード</span><span>TopView</span></div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-logo">💼</div>
+        <h3>LinkedIn広告</h3>
+        <p>BtoBに特化した意思決定者へのリーチ</p>
+        <div class="channel-tags"><span>スポンサード</span><span>InMail</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: #f8f9fa;">
+  <div class="section-inner">
+    <div class="section-label">HOW WE WORK</div>
+    <h2 class="section-title">支援プロセス</h2>
+    <p class="section-text">仮説構築〜効果測定まで一気通貫。データに基づいた分析と効果検証で、再現性のある改善を実現します。</p>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">1</div>
+        <div class="process-content">
+          <h4>KGI・KPI設計 / 現状診断</h4>
+          <p>事業目標から逆算し、広告で達成すべきKPIを設計。現状の配信データ・アカウント構造を診断します。</p>
+        </div>
+      </div>
+      <div class="process-arrow">↓</div>
+      <div class="process-step">
+        <div class="process-num">2</div>
+        <div class="process-content">
+          <h4>チャネル選定 / 投資アロケーション設計</h4>
+          <p>ターゲット・予算・目標に合わせ、最適な媒体と予算配分を設計します。</p>
+        </div>
+      </div>
+      <div class="process-arrow">↓</div>
+      <div class="process-step">
+        <div class="process-num">3</div>
+        <div class="process-content">
+          <h4>クリエイティブ制作 / 配信設定</h4>
+          <p>バナー・動画・テキストのA/Bテスト設計から制作・配信設定まで一貫対応します。</p>
+        </div>
+      </div>
+      <div class="process-arrow">↓</div>
+      <div class="process-step">
+        <div class="process-num">4</div>
+        <div class="process-content">
+          <h4>効果測定 / ROAS改善・PDCA</h4>
+          <p>定量・定性の両面で効果を可視化し、ROAS最大化・CPA改善のPDCAを高速で回します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section features">
+  <div class="section-inner">
+    <div class="section-label">WHY BRAIDEA</div>
+    <h2 class="section-title">BRAIDEAが選ばれる理由</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>広告効果の正確な計測</h3>
+        <p>KPIの策定から各種効果測定ツールの設定・分析までを実施。「何をもって成果とするか」を定め、正確な投資判断を実現します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>媒体横断の最適化</h3>
+        <p>各媒体を個別最適ではなく全体最適の視点で管理。チャネル横断での予算配分と成果最大化を実現します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>クリエイティブのPDCA</h3>
+        <p>バナー・動画・コピーのA/Bテストを継続実施。CTR・CVRの両面から改善サイクルを回します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <h3>インハウス化支援</h3>
+        <p>代理店依存からの脱却を支援。社内で広告運用を自走できるノウハウ移転・体制構築まで対応します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>集客〜CVまで一気通貫</h3>
+        <p>広告だけでなくLP改善・EFO・データ計測との連携により、集客から成約まで全体最適を実現します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💼</div>
+        <h3>BtoBリード獲得に強い</h3>
+        <p>法人向けの商材・サービスに対し、意思決定者への的確なアプローチとリード獲得施策を設計します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: #f8f9fa;">
+  <div class="section-inner">
+    <div class="section-label">CASE STUDY</div>
+    <h2 class="section-title">支援実績（一部）</h2>
+    <p class="section-text" style="margin-bottom: 0;">※ 実際の数値に差し替えてください</p>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="tag">BtoB SaaS</div>
+        <h4>リスティング広告改善でCPA半減</h4>
+        <div class="case-result">▼50%<small>CPA改善（3ヶ月）</small></div>
+      </div>
+      <div class="case-card">
+        <div class="tag">EC・通販</div>
+        <h4>Meta広告の投資対効果を3倍に改善</h4>
+        <div class="case-result">3倍<small>ROAS改善（6ヶ月）</small></div>
+      </div>
+      <div class="case-card">
+        <div class="tag">サービス業</div>
+        <h4>新規獲得コストを1/4に削減</h4>
+        <div class="case-result">▼75%<small>新規獲得コスト削減</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくある質問</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">広告費の最低金額はありますか？</div>
+        <div class="faq-a">目安として月額広告費30万円〜を推奨しています。ただし、事業規模・目標によって異なりますので、まずはご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">現在の代理店から切り替えることはできますか？</div>
+        <div class="faq-a">はい、可能です。既存のアカウントデータを引き継ぎながら、より戦略的な運用体制に移行するサポートを行います。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">クリエイティブ制作も対応していますか？</div>
+        <div class="faq-a">はい、バナー・動画・コピーの制作から、A/Bテスト設計・効果測定まで一貫して対応します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">効果測定のレポートはどのように提供されますか？</div>
+        <div class="faq-a">月次レポートと定例ミーティング（月1〜2回）を基本としています。データに基づく改善提案も合わせて実施します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-block" id="cta">
+  <h2>まずは無料で広告診断をご依頼ください</h2>
+  <p>現状の広告アカウントを無料で診断。改善ポイントをお伝えします。</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-white">無料診断を依頼する</a>
+    <a href="#" class="btn-ghost">資料ダウンロード</a>
+  </div>
+</div>
+
+<footer>
+  <div><div class="footer-logo">BRAIDEA</div><p style="margin-top:8px;">© 2025 BRAIDEA Inc. All rights reserved.</p></div>
+  <div><a href="#">プライバシーポリシー</a><a href="#">会社概要</a></div>
+</footer>
+</body>
+</html>

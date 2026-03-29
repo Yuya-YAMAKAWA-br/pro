@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LPO / UI・UX / アクセス解析 / 生成AI導入 | BRAIDEA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; line-height: 1.8; }
+    .wf-note { background: #FFFDE7; border: 2px dashed #FFC107; padding: 12px 24px; font-size: 13px; color: #795548; text-align: center; position: sticky; top: 0; z-index: 9999; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; margin-top: 38px; }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 28px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 22px; border-radius: 6px; font-weight: 600; }
+    .page-hero { padding: 160px 48px 100px; background: linear-gradient(160deg, #f8f9fa 0%, #fff 100%); border-bottom: 1px solid #eee; }
+    .page-hero .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+    .page-hero .breadcrumb a { color: #aaa; text-decoration: none; }
+    .page-hero .service-tag { display: inline-block; background: #1a1a2e; color: #fff; font-size: 11px; letter-spacing: 3px; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
+    .page-hero h1 { font-size: 38px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; line-height: 1.3; }
+    .page-hero .sub { font-size: 16px; color: #888; margin-bottom: 20px; }
+    .page-hero .lead { font-size: 17px; color: #555; max-width: 700px; line-height: 1.9; margin-bottom: 40px; }
+    .hero-cta-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: #1a1a2e; color: #fff; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    .btn-outline { display: inline-block; border: 2px solid #1a1a2e; color: #1a1a2e; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    .section { padding: 100px 48px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #4a6cf7; margin-bottom: 12px; font-weight: 600; }
+    .section-title { font-size: 32px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; line-height: 1.4; }
+    .section-text { font-size: 16px; color: #555; line-height: 1.9; }
+
+    /* SUB SERVICE TABS */
+    .sub-services { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px; }
+    .sub-service { background: #f8f9fa; border-radius: 16px; padding: 36px 32px; }
+    .sub-service h3 { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .sub-service-icon { font-size: 28px; }
+    .sub-service p { font-size: 15px; color: #666; line-height: 1.8; margin-bottom: 20px; }
+    .sub-service ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .sub-service ul li { font-size: 14px; color: #555; display: flex; align-items: center; gap: 10px; }
+    .sub-service ul li::before { content: "→"; color: #4a6cf7; font-weight: 700; }
+
+    .challenges { background: #f8f9fa; }
+    .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .challenge-card { background: #fff; border-radius: 12px; padding: 32px 24px; border-left: 4px solid #1a1a2e; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .challenge-card h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .challenge-card p { font-size: 13px; color: #888; line-height: 1.7; }
+
+    /* FUNNEL */
+    .funnel-wrap { margin-top: 48px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .funnel-step { width: 100%; max-width: 600px; padding: 20px 32px; border-radius: 8px; text-align: center; }
+    .funnel-step:nth-child(1) { background: #1a1a2e; color: #fff; }
+    .funnel-step:nth-child(2) { background: #2d2d5e; color: #fff; width: 85%; }
+    .funnel-step:nth-child(3) { background: #4a4a8a; color: #fff; width: 70%; }
+    .funnel-step:nth-child(4) { background: #4a6cf7; color: #fff; width: 55%; }
+    .funnel-step h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .funnel-step p { font-size: 13px; opacity: 0.8; }
+    .funnel-label { font-size: 13px; color: #4a6cf7; font-weight: 600; text-align: right; width: 100%; max-width: 600px; margin-top: 12px; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .feature-card { background: #fff; border-radius: 12px; padding: 36px 28px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .feature-icon { font-size: 36px; margin-bottom: 16px; }
+    .feature-card h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .feature-card p { font-size: 14px; color: #777; line-height: 1.7; }
+
+    /* AI SECTION */
+    .ai-section { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); color: #fff; padding: 100px 48px; }
+    .ai-inner { max-width: 900px; margin: 0 auto; }
+    .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; align-items: start; }
+    .ai-text p { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.9; margin-bottom: 20px; }
+    .ai-items { display: flex; flex-direction: column; gap: 16px; }
+    .ai-item { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 16px; }
+    .ai-item-icon { font-size: 24px; flex-shrink: 0; }
+    .ai-item h4 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .ai-item p { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0; }
+
+    .faq { background: #f8f9fa; }
+    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
+    .faq-item { background: #fff; border-radius: 10px; padding: 28px 32px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
+    .faq-q { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start; }
+    .faq-q::before { content: "Q"; background: #1a1a2e; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .faq-a { font-size: 14px; color: #666; line-height: 1.8; padding-left: 36px; }
+    .cta-block { background: #1a1a2e; padding: 80px 48px; text-align: center; color: #fff; }
+    .cta-block h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+    .cta-block p { font-size: 16px; opacity: 0.7; margin-bottom: 36px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { display: inline-block; background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
+    .btn-ghost { display: inline-block; border: 2px solid rgba(255,255,255,0.5); color: #fff; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    footer .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    @media (max-width: 768px) {
+      header { padding: 12px 20px; } nav a { display: none; }
+      .page-hero { padding: 120px 20px 60px; } .page-hero h1 { font-size: 26px; }
+      .section { padding: 60px 20px; }
+      .sub-services, .challenge-grid, .features-grid, .ai-grid { grid-template-columns: 1fr; }
+      .ai-section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wf-note"><strong>WIREFRAME</strong> — SERVICE 04 詳細ページ / LPO・UI/UX・解析・AI導入 / BRAIDEA</div>
+
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス一覧</a>
+    <a href="#">支援実績</a>
+    <a href="#">資料ダウンロード</a>
+    <a href="#">会社情報</a>
+    <a href="#cta" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="top.html">TOP</a> &gt; <a href="services.html">サービス</a> &gt; LPO / UI・UX / 解析 / AI導入</p>
+  <div class="service-tag">SERVICE 04</div>
+  <h1>LPO / UI・UXデザイン /<br>アクセス解析 / 生成AI導入支援</h1>
+  <p class="sub">集客の「その先」を、データで最適化する</p>
+  <p class="lead">
+    サイトに来たユーザーが、コンバージョンするまでの一連の流れをCTR・CVRの両面から評価し、仮説構築〜効果測定まで一気通貫して支援します。ツール設定から分析・改善まで、すべてをワンストップで対応します。
+  </p>
+  <div class="hero-cta-wrap">
+    <a href="#cta" class="btn-primary">無料相談はこちら</a>
+    <a href="#" class="btn-outline">資料ダウンロード</a>
+  </div>
+</div>
+
+<!-- SUB SERVICES -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">SERVICES IN THIS AREA</div>
+    <h2 class="section-title">4つの支援領域</h2>
+    <div class="sub-services">
+      <div class="sub-service">
+        <h3><span class="sub-service-icon">🎯</span>LPO / CVR改善</h3>
+        <p>LP・サイトのコンバージョン率を、データに基づいた仮説検証で継続的に改善します。</p>
+        <ul>
+          <li>LP改善提案・A/Bテスト設計・実施</li>
+          <li>ヒートマップ分析・行動データ解析</li>
+          <li>フォーム最適化（EFO）</li>
+          <li>CTA改善・導線設計</li>
+        </ul>
+      </div>
+      <div class="sub-service">
+        <h3><span class="sub-service-icon">🎨</span>UI・UXデザイン</h3>
+        <p>ユーザーが自然に目的のアクションへ進める導線とUIを設計します。</p>
+        <ul>
+          <li>UI/UXデザインレビュー・改善提案</li>
+          <li>ユーザー行動分析・UX診断</li>
+          <li>ワイヤーフレーム・プロトタイプ制作</li>
+          <li>スマートフォン対応最適化</li>
+        </ul>
+      </div>
+      <div class="sub-service">
+        <h3><span class="sub-service-icon">📊</span>アクセス解析</h3>
+        <p>GA4・ヒートマップを活用し、課題の根本原因を特定。改善の優先順位を設計します。</p>
+        <ul>
+          <li>GA4 設定・カスタム計測・移行支援</li>
+          <li>コンバージョン計測・ファネル分析</li>
+          <li>GTMタグ設定・管理</li>
+          <li>月次レポート・改善提案</li>
+        </ul>
+      </div>
+      <div class="sub-service">
+        <h3><span class="sub-service-icon">🤖</span>生成AI導入支援</h3>
+        <p>業務に合った生成AI活用を設計し、実際に運用できる形で導入をサポートします。</p>
+        <ul>
+          <li>AI活用ロードマップ設計</li>
+          <li>ChatGPT / Claude の業務活用設計</li>
+          <li>プロンプト設計・運用ルール策定</li>
+          <li>社内研修・ワークショップ実施</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section challenges">
+  <div class="section-inner">
+    <div class="section-label">CHALLENGES</div>
+    <h2 class="section-title">こんな課題はありませんか？</h2>
+    <div class="challenge-grid">
+      <div class="challenge-card">
+        <h3>集客はできているがCV・問い合わせにつながらない</h3>
+        <p>アクセス数は伸びているのに成果が出ない。LPや導線に問題があると感じているが、改善方法がわからない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>どこでユーザーが離脱しているか把握できていない</h3>
+        <p>直帰率が高い・フォーム離脱が多い。データが取れていないため、原因の特定ができない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>GA4に移行したが使いこなせていない</h3>
+        <p>UA（ユニバーサルアナリティクス）から移行したが、正確な計測ができているか自信がない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>A/Bテストを実施したいが設計方法がわからない</h3>
+        <p>何をテストすればいいかわからない。テスト設計・効果判定の方法が不明確。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>生成AIを導入したいが何から始めるべきかわからない</h3>
+        <p>ChatGPT等を試しているが、業務への定着・活用ルール策定が進んでいない。</p>
+      </div>
+      <div class="challenge-card">
+        <h3>AIツールを導入したが社内に定着していない</h3>
+        <p>ツールを購入・契約したが、使いこなせるメンバーが限られており、ROIが出ていない。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNNEL -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">OUR APPROACH</div>
+    <h2 class="section-title">集客の「その先」を最適化する</h2>
+    <p class="section-text">BRAIDEAは、広告・SEOで集客した後の「受け皿」であるLP・サイト・フォームを継続的に改善します。CTR・CVRの両面から評価し、ファネル全体の成果最大化に貢献します。</p>
+    <div class="funnel-wrap">
+      <div class="funnel-step">
+        <h4>認知・流入（広告 / SEO / SNS）</h4>
+        <p>↑ SERVICE 01〜03 で対応</p>
+      </div>
+      <div class="funnel-step">
+        <h4>LP・サイト閲覧</h4>
+        <p>UI/UX改善・LPO でCTR向上</p>
+      </div>
+      <div class="funnel-step">
+        <h4>フォーム・問い合わせ</h4>
+        <p>EFO・フォーム最適化でCV率向上</p>
+      </div>
+      <div class="funnel-step">
+        <h4>コンバージョン</h4>
+        <p>データ計測・A/Bテストで継続改善</p>
+      </div>
+      <p class="funnel-label">← SERVICE 04 の支援範囲</p>
+    </div>
+  </div>
+</section>
+
+<!-- AI SECTION -->
+<section class="ai-section">
+  <div class="ai-inner">
+    <div class="section-label" style="color: rgba(255,255,255,0.5);">GENERATIVE AI</div>
+    <h2 class="section-title" style="color: #fff;">生成AI導入支援</h2>
+    <div class="ai-grid">
+      <div class="ai-text">
+        <p>「AIを使いたいが、何から始めればいいかわからない」——そんな企業のために、業務に合った生成AI活用を設計します。</p>
+        <p>ツールを導入して終わりではなく、実際の業務に定着し、ROIが出る形でのサポートを提供します。マーケティング業務の効率化から、社内ナレッジ活用・コンテンツ生成まで幅広く対応します。</p>
+      </div>
+      <div class="ai-items">
+        <div class="ai-item">
+          <div class="ai-item-icon">🗺️</div>
+          <div>
+            <h4>AI活用ロードマップ設計</h4>
+            <p>現状の業務フローを分析し、AIで効率化できる領域を特定。段階的な導入計画を設計します。</p>
+          </div>
+        </div>
+        <div class="ai-item">
+          <div class="ai-item-icon">💬</div>
+          <div>
+            <h4>プロンプト設計・運用ルール策定</h4>
+            <p>業務目的に合わせたプロンプトテンプレートを設計。社内での活用ルール・ガイドラインを整備します。</p>
+          </div>
+        </div>
+        <div class="ai-item">
+          <div class="ai-item-icon">📚</div>
+          <div>
+            <h4>社内研修・ワークショップ</h4>
+            <p>実際の業務を想定したハンズオン研修を実施。現場レベルでの定着を支援します。</p>
+          </div>
+        </div>
+        <div class="ai-item">
+          <div class="ai-item-icon">📈</div>
+          <div>
+            <h4>マーケティング業務へのAI活用</h4>
+            <p>コンテンツ生成・レポート作成・広告コピー等、マーケ業務へのAI統合を専門的に支援します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: #f8f9fa;">
+  <div class="section-inner">
+    <div class="section-label">WHY BRAIDEA</div>
+    <h2 class="section-title">BRAIDEAが選ばれる理由</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔧</div>
+        <h3>ツール設定〜改善まで一気通貫</h3>
+        <p>GA4・ヒートマップ等のツール設定から、分析・CVR改善施策の実行まで、すべてワンストップで対応します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔬</div>
+        <h3>データに基づく仮説検証</h3>
+        <p>感覚的な改善ではなく、ユーザー行動データ・ヒートマップ・A/Bテスト結果に基づいた再現性のある改善を実施します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>集客〜CVを横断した最適化</h3>
+        <p>LP単体の改善にとどまらず、広告・SEO・コンテンツとの連携により、ファネル全体の成果最大化を実現します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>正確なデータ計測基盤の構築</h3>
+        <p>計測が正確でなければ改善もできません。GA4・GTM・各種ツールの正確な設定から支援します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>マーケ×AIの統合支援</h3>
+        <p>生成AI導入をマーケティング業務と切り離さず、集客・コンテンツ・分析業務へのAI活用として統合的に設計します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏗️</div>
+        <h3>現場に定着する導入サポート</h3>
+        <p>ツール導入だけで終わらせない。研修・運用ルール・フォローアップで、実際に現場で使われる状態を作ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくある質問</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">LPOだけ、またはGA4設定だけの依頼も可能ですか？</div>
+        <div class="faq-a">はい、スポット対応も承っています。ただし、ツール設定〜分析〜改善まで一貫して支援する方が成果が出やすいため、まずはご状況をヒアリングさせてください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">A/Bテストを実施するためのツールは何が必要ですか？</div>
+        <div class="faq-a">VWO・Optimizely・Google Optimize代替ツール等に対応しています。現状のツール環境に合わせてご提案します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">生成AI導入支援は何名規模から対応していますか？</div>
+        <div class="faq-a">5名程度の小チームから対応しています。全社展開の場合も段階的な導入プランをご提案します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">CVR改善の効果はどのくらいで出ますか？</div>
+        <div class="faq-a">施策の内容によりますが、フォームEFOやCTAの改善は1〜2ヶ月で効果が出るケースが多いです。LP全体のリデザインは3ヶ月を目安にしています。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-block" id="cta">
+  <h2>まずは現状のLP・サイトを無料診断します</h2>
+  <p>CVRを下げている原因を特定し、改善提案をお伝えします。</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-white">無料診断を依頼する</a>
+    <a href="#" class="btn-ghost">資料ダウンロード</a>
+  </div>
+</div>
+
+<footer>
+  <div><div class="footer-logo">BRAIDEA</div><p style="margin-top:8px;">© 2025 BRAIDEA Inc. All rights reserved.</p></div>
+  <div><a href="#">プライバシーポリシー</a><a href="#">会社概要</a></div>
+</footer>
+</body>
+</html>
