@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAIDEA - サービス一覧 ワイヤーフレーム</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
+
+    .wireframe-note {
+      background: #FFFDE7;
+      border: 2px dashed #FFC107;
+      padding: 16px 24px;
+      font-size: 13px;
+      color: #795548;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+    .wireframe-note strong { color: #E65100; }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 32px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    nav a:hover { color: #1a1a2e; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 160px 48px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+    }
+    .page-hero .label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 17px;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* OVERVIEW SECTION */
+    .overview {
+      padding: 80px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .overview-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+    .overview-center {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+    .overview-center small {
+      font-size: 11px;
+      opacity: 0.6;
+      font-weight: 400;
+    }
+    .overview-arms {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .overview-arm {
+      background: #f8f9fa;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .overview-arm:hover {
+      border-color: #4a6cf7;
+      transform: translateY(-2px);
+    }
+    .overview-arm h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    .overview-arm p {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+    }
+    .overview-arm .arm-num {
+      display: inline-block;
+      background: #1a1a2e;
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 28px;
+      margin-bottom: 12px;
+    }
+
+    /* SERVICE DETAIL SECTIONS */
+    .service-detail {
+      padding: 100px 48px;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .service-detail:nth-child(odd) {
+      direction: rtl;
+    }
+    .service-detail:nth-child(odd) > * {
+      direction: ltr;
+    }
+    .service-detail-border {
+      border-top: 1px solid #eee;
+    }
+    .service-text {}
+    .service-text .num {
+      font-size: 12px;
+      font-weight: 700;
+      color: #4a6cf7;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .service-text h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .service-text p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .service-features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+    .service-features li {
+      font-size: 14px;
+      color: #555;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .service-features li::before {
+      content: "✓";
+      color: #4a6cf7;
+      font-weight: 700;
+    }
+    .service-visual {
+      background: #f8f9fa;
+      border-radius: 16px;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 14px;
+      border: 2px dashed #e0e0e0;
+    }
+    .service-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a2e;
+      text-decoration: none;
+      border: 1px solid #1a1a2e;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .service-cta-link:hover {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    /* COMPARISON TABLE */
+    .comparison {
+      padding: 80px 48px;
+      text-align: center;
+      background: #f8f9fa;
+    }
+    .comparison h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+    .comparison > p {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 48px;
+    }
+    .comparison-table {
+      max-width: 900px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: 16px 20px;
+      font-size: 14px;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .comparison-table th {
+      background: #1a1a2e;
+      color: #fff;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .comparison-table td:first-child {
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    .check { color: #4a6cf7; font-weight: 700; }
+    .dash { color: #ddd; }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      padding: 80px 48px;
+      text-align: center;
+    }
+    .bottom-cta h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .bottom-cta p {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 36px;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+    .btn-dark {
+      display: inline-block;
+      background: #1a1a2e;
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid #1a1a2e;
+      color: #1a1a2e;
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      padding: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    footer .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header { padding: 12px 20px; }
+      nav a { display: none; }
+      .page-hero { padding: 120px 20px 60px; }
+      .page-hero h1 { font-size: 28px; }
+      .overview { padding: 60px 20px; }
+      .overview-arms { grid-template-columns: 1fr; }
+      .service-detail { grid-template-columns: 1fr; padding: 60px 20px; gap: 30px; }
+      .service-detail:nth-child(odd) { direction: ltr; }
+      .comparison { padding: 60px 20px; }
+      .comparison-table { font-size: 12px; }
+      .bottom-cta { padding: 60px 20px; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wireframe-note">
+  <strong>WIREFRAME</strong> — サービスページ（一覧 + 個別詳細）/ BRAIDEA リニューアル
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="#services">サービス</a>
+    <a href="top.html#flow">ご支援の流れ</a>
+    <a href="#">資料ダウンロード</a>
+    <a href="#">会社情報</a>
+    <a href="#" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="label">SERVICES</div>
+  <h1>サービス一覧</h1>
+  <p>戦略立案から広告運用・サイト改善・AI導入まで、<br>マーケティングの全体最適を一気通貫で支援します。</p>
+</div>
+
+<!-- OVERVIEW DIAGRAM -->
+<section class="overview" id="services">
+  <div class="overview-arms">
+    <a href="#s1" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">1</div>
+      <h3>総合マーケティング伴走</h3>
+      <p>戦略設計〜施策実行〜効果測定<br>全体最適をワンチームで伴走</p>
+    </a>
+    <a href="#s2" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">2</div>
+      <h3>デジタル集客</h3>
+      <p>リスティング・SNS・運用型広告<br>最適な配分でリードを獲得</p>
+    </a>
+    <a href="#s3" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">3</div>
+      <h3>サイト改善（LLMO/SEO）</h3>
+      <p>生成AI時代の検索最適化<br>コンテンツ戦略〜テクニカルSEO</p>
+    </a>
+    <a href="#s4" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">4</div>
+      <h3>LPO / UI・UX / 解析 / AI導入</h3>
+      <p>データドリブンなLP改善<br>生成AIの業務導入支援</p>
+    </a>
+  </div>
+</section>
+
+<!-- ========== SERVICE 01 ========== -->
+<div class="service-detail service-detail-border" id="s1">
+  <div class="service-text">
+    <div class="num">SERVICE 01</div>
+    <h2>総合マーケティング伴走</h2>
+    <p>
+      「何をやればいいかわからない」「施策が点になっている」——<br>
+      そんな課題に、戦略〜実行〜改善を一貫して伴走。
+      自社のマーケティングチームのように機能します。
+    </p>
+    <ul class="service-features">
+      <li>マーケティング戦略立案・KPI設計</li>
+      <li>チャネル横断の施策ロードマップ作成</li>
+      <li>月次レポート・改善提案</li>
+      <li>定例ミーティングでPDCA運用</li>
+    </ul>
+    <a href="#" class="service-cta-link">資料をダウンロード →</a>
+  </div>
+  <div class="service-visual">
+    イメージ画像 / 図解<br>
+    （戦略→実行→改善の循環図など）
+  </div>
+</div>
+
+<!-- ========== SERVICE 02 ========== -->
+<div class="service-detail" id="s2">
+  <div class="service-text">
+    <div class="num">SERVICE 02</div>
+    <h2>デジタル集客<br><small style="font-size:16px;color:#888;font-weight:400;">運用型広告 / リスティング / SNS広告</small></h2>
+    <p>
+      広告費を「かけている」から「効かせている」へ。<br>
+      Google・Meta・LINE等の主要媒体を横断で最適化し、
+      費用対効果を最大化します。
+    </p>
+    <ul class="service-features">
+      <li>Google広告（検索・ディスプレイ・P-MAX）</li>
+      <li>Meta広告（Facebook / Instagram）</li>
+      <li>LINE広告 / X(Twitter)広告</li>
+      <li>クリエイティブ制作・A/Bテスト</li>
+      <li>ROAS改善・予算配分最適化</li>
+    </ul>
+    <a href="#" class="service-cta-link">資料をダウンロード →</a>
+  </div>
+  <div class="service-visual">
+    イメージ画像 / 図解<br>
+    （広告チャネル × ROAS改善のグラフなど）
+  </div>
+</div>
+
+<!-- ========== SERVICE 03 ========== -->
+<div class="service-detail service-detail-border" id="s3">
+  <div class="service-text">
+    <div class="num">SERVICE 03</div>
+    <h2>サイト改善<br><small style="font-size:16px;color:#888;font-weight:400;">LLMO / SEO / コンテンツマーケティング</small></h2>
+    <p>
+      ChatGPT・Perplexity等のAI検索にも最適化する「LLMO」時代へ。<br>
+      従来のSEOに加え、LLMに選ばれるコンテンツ戦略を設計します。
+    </p>
+    <ul class="service-features">
+      <li>LLMO対策（AI検索最適化）</li>
+      <li>テクニカルSEO監査・改善</li>
+      <li>コンテンツ戦略設計・記事制作</li>
+      <li>内部リンク・サイト構造最適化</li>
+      <li>Search Console / GA4分析</li>
+    </ul>
+    <a href="#" class="service-cta-link">資料をダウンロード →</a>
+  </div>
+  <div class="service-visual">
+    イメージ画像 / 図解<br>
+    （従来SEO vs LLMO の比較図など）
+  </div>
+</div>
+
+<!-- ========== SERVICE 04 ========== -->
+<div class="service-detail" id="s4">
+  <div class="service-text">
+    <div class="num">SERVICE 04</div>
+    <h2>LPO / UI・UXデザイン /<br>アクセス解析 / 生成AI導入</h2>
+    <p>
+      集客した後の「受け皿」を最適化。<br>
+      データに基づくLP改善・UX設計で CVRを向上させます。
+      生成AIの業務導入コンサルティングも対応。
+    </p>
+    <ul class="service-features">
+      <li>LP最適化（LPO）・A/Bテスト設計</li>
+      <li>UI/UXデザイン改善</li>
+      <li>GA4 / ヒートマップによるアクセス解析</li>
+      <li>生成AI導入支援（業務効率化・マーケ活用）</li>
+      <li>ChatGPT / Claude 等の社内活用設計</li>
+    </ul>
+    <a href="#" class="service-cta-link">資料をダウンロード →</a>
+  </div>
+  <div class="service-visual">
+    イメージ画像 / 図解<br>
+    （ヒートマップ / AI導入フローなど）
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<section class="comparison">
+  <h2>サービス対応範囲</h2>
+  <p>各サービスでカバーする領域の一覧です</p>
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>対応領域</th>
+        <th>総合伴走</th>
+        <th>デジタル集客</th>
+        <th>サイト改善</th>
+        <th>LPO/UX/AI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>戦略立案・KPI設計</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>リスティング広告運用</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>SNS広告運用</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>SEO / LLMO</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>コンテンツ制作</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+      </tr>
+      <tr>
+        <td>LPO / A/Bテスト</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td class="check">●</td>
+      </tr>
+      <tr>
+        <td>UI/UXデザイン</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td class="check">●</td>
+      </tr>
+      <tr>
+        <td>アクセス解析</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+      </tr>
+      <tr>
+        <td>生成AI導入支援</td>
+        <td class="check">●</td>
+        <td class="dash">—</td>
+        <td class="dash">—</td>
+        <td class="check">●</td>
+      </tr>
+      <tr>
+        <td>月次レポート・定例</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+        <td class="check">●</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>サービスについて詳しく知りたい方へ</h2>
+  <p>各サービスの詳細資料をご用意しています。お気軽にご相談ください。</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-dark">お問い合わせ</a>
+    <a href="#" class="btn-outline">資料ダウンロード</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">BRAIDEA</div>
+    <p style="margin-top: 8px;">© 2025 BRAIDEA Inc. All rights reserved.</p>
+  </div>
+  <div>
+    <a href="#">プライバシーポリシー</a>
+    <a href="#">会社概要</a>
+  </div>
+</footer>
+
+</body>
+</html>
