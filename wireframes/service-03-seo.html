@@ -4,91 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>サイト改善（LLMO/SEO）| BRAIDEA</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; line-height: 1.8; }
-    .wf-note { background: #FFFDE7; border: 2px dashed #FFC107; padding: 12px 24px; font-size: 13px; color: #795548; text-align: center; position: sticky; top: 0; z-index: 9999; }
-    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; margin-top: 38px; }
-    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
-    nav a { margin-left: 28px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
-    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 22px; border-radius: 6px; font-weight: 600; }
-    .page-hero { padding: 160px 48px 100px; background: linear-gradient(160deg, #f8f9fa 0%, #fff 100%); border-bottom: 1px solid #eee; }
-    .page-hero .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 20px; }
-    .page-hero .breadcrumb a { color: #aaa; text-decoration: none; }
-    .page-hero .service-tag { display: inline-block; background: #1a1a2e; color: #fff; font-size: 11px; letter-spacing: 3px; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
-    .page-hero h1 { font-size: 42px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; line-height: 1.3; }
-    .page-hero .sub { font-size: 18px; color: #888; margin-bottom: 20px; }
-    .page-hero .lead { font-size: 17px; color: #555; max-width: 700px; line-height: 1.9; margin-bottom: 40px; }
-    .hero-cta-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn-primary { display: inline-block; background: #1a1a2e; color: #fff; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
-    .btn-outline { display: inline-block; border: 2px solid #1a1a2e; color: #1a1a2e; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
-    .section { padding: 100px 48px; }
-    .section-inner { max-width: 900px; margin: 0 auto; }
-    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #4a6cf7; margin-bottom: 12px; font-weight: 600; }
-    .section-title { font-size: 32px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; line-height: 1.4; }
-    .section-text { font-size: 16px; color: #555; line-height: 1.9; }
-
-    /* LLMO COMPARE */
-    .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
-    .compare-card { border-radius: 12px; padding: 32px; }
-    .compare-card.old { background: #f8f9fa; border: 1px solid #eee; }
-    .compare-card.new { background: #1a1a2e; color: #fff; }
-    .compare-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
-    .compare-card.new h3 { color: #fff; }
-    .compare-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .compare-list li { font-size: 14px; display: flex; align-items: center; gap: 10px; }
-    .compare-card.old .compare-list li { color: #888; }
-    .compare-card.new .compare-list li { color: rgba(255,255,255,0.85); }
-    .compare-card.old .compare-list li::before { content: "✗"; color: #ccc; }
-    .compare-card.new .compare-list li::before { content: "✓"; color: #a78bfa; }
-
-    .challenges { background: #f8f9fa; }
-    .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-    .challenge-card { background: #fff; border-radius: 12px; padding: 32px 24px; border-left: 4px solid #1a1a2e; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-    .challenge-card h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
-    .challenge-card p { font-size: 13px; color: #888; line-height: 1.7; }
-    .scope-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
-    .scope-item { display: flex; align-items: flex-start; gap: 14px; padding: 24px; background: #f8f9fa; border-radius: 10px; }
-    .scope-check { width: 24px; height: 24px; background: #1a1a2e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 2px; }
-    .scope-item h4 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
-    .scope-item p { font-size: 13px; color: #888; line-height: 1.6; }
-    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-    .feature-card { background: #fff; border-radius: 12px; padding: 36px 28px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
-    .feature-icon { font-size: 36px; margin-bottom: 16px; }
-    .feature-card h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
-    .feature-card p { font-size: 14px; color: #777; line-height: 1.7; }
-    .flow-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 48px; }
-    .flow-step { background: #f8f9fa; border-radius: 12px; padding: 28px 20px; text-align: center; position: relative; }
-    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: #ccc; font-size: 20px; }
-    .flow-step-num { width: 40px; height: 40px; background: #1a1a2e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; margin: 0 auto 16px; }
-    .flow-step h4 { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
-    .flow-step p { font-size: 12px; color: #888; line-height: 1.6; }
-    .faq { background: #f8f9fa; }
-    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
-    .faq-item { background: #fff; border-radius: 10px; padding: 28px 32px; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
-    .faq-q { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; display: flex; gap: 12px; align-items: flex-start; }
+    .flow-steps { grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .flow-step { background: #f8f9fa; border-radius: 12px; padding: 28px 20px; }
+    .flow-step-num { width: 40px; height: 40px; font-size: 16px; }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; }
+    .faq-item { background: #fff; border-radius: 10px; padding: 28px 32px; border-bottom: none; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
     .faq-q::before { content: "Q"; background: #1a1a2e; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
-    .faq-a { font-size: 14px; color: #666; line-height: 1.8; padding-left: 36px; }
-    .cta-block { background: #1a1a2e; padding: 80px 48px; text-align: center; color: #fff; }
-    .cta-block h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
-    .cta-block p { font-size: 16px; opacity: 0.7; margin-bottom: 36px; }
-    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-white { display: inline-block; background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
-    .btn-ghost { display: inline-block; border: 2px solid rgba(255,255,255,0.5); color: #fff; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
-    footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
-    footer .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
-    @media (max-width: 1100px) {
-      .flow-steps { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 768px) {
-      header { padding: 12px 20px; } nav a { display: none; }
-      .page-hero { padding: 120px 20px 60px; } .page-hero h1 { font-size: 28px; }
-      .section { padding: 60px 20px; }
-      .compare-wrap, .challenge-grid, .features-grid, .scope-list { grid-template-columns: 1fr; }
-      .flow-steps { grid-template-columns: 1fr 1fr; }
-      .flow-steps .flow-step:not(:last-child)::after { display: none; }
-    }
+    .faq-a { padding-left: 36px; }
+    @media (max-width: 1100px) { .flow-steps { grid-template-columns: repeat(3, 1fr); } }
   </style>
 </head>
 <body>

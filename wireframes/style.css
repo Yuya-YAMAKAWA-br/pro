@@ -1,0 +1,496 @@
+/* ============================================================
+   BRAIDEA Wireframe — Shared Stylesheet
+   style.css
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   RESET & BASE
+---------------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif;
+  color: #333;
+  background: #fff;
+  line-height: 1.8;
+}
+
+/* ----------------------------------------------------------
+   COLORS (CSS Variables)
+---------------------------------------------------------- */
+:root {
+  --brand-dark:   #1a1a2e;
+  --brand-accent: #4a6cf7;
+  --brand-warm:   #f97316;   /* hover / CTA accent */
+  --brand-purple: #a78bfa;
+  --text-muted:   #888;
+  --bg-light:     #f8f9fa;
+  --border:       #eee;
+}
+
+/* ----------------------------------------------------------
+   WIREFRAME NOTE
+---------------------------------------------------------- */
+.wf-note,
+.wireframe-note {
+  background: #FFFDE7;
+  border: 2px dashed #FFC107;
+  padding: 12px 24px;
+  font-size: 13px;
+  color: #795548;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.wf-note strong,
+.wireframe-note strong { color: #E65100; }
+
+/* ----------------------------------------------------------
+   HEADER / NAV
+---------------------------------------------------------- */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 48px;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  margin-top: 38px;
+}
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--brand-dark);
+  text-decoration: none;
+}
+nav a {
+  margin-left: 28px;
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+  font-weight: 500;
+}
+nav a:hover { color: var(--brand-dark); }
+.nav-cta {
+  background: var(--brand-dark);
+  color: #fff !important;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------
+   PAGE HERO (service detail pages)
+---------------------------------------------------------- */
+.page-hero {
+  padding: 160px 48px 100px;
+  background: linear-gradient(160deg, var(--bg-light) 0%, #fff 100%);
+  border-bottom: 1px solid var(--border);
+}
+.page-hero .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+.page-hero .breadcrumb a { color: #aaa; text-decoration: none; }
+.page-hero .service-tag {
+  display: inline-block;
+  background: var(--brand-dark);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 3px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.page-hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--brand-dark);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.page-hero .sub { font-size: 18px; color: var(--text-muted); margin-bottom: 20px; }
+.page-hero .lead {
+  font-size: 17px;
+  color: #555;
+  max-width: 700px;
+  line-height: 1.9;
+  margin-bottom: 40px;
+}
+.hero-cta-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* ----------------------------------------------------------
+   BUTTONS
+---------------------------------------------------------- */
+.btn-primary {
+  display: inline-block;
+  background: var(--brand-dark);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-outline {
+  display: inline-block;
+  border: 2px solid var(--brand-dark);
+  color: var(--brand-dark);
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-white {
+  display: inline-block;
+  background: #fff;
+  color: var(--brand-dark);
+  padding: 16px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn-outline-white {
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.4);
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.btn-ghost {
+  display: inline-block;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: #fff;
+  padding: 14px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.btn-dark {
+  display: inline-block;
+  background: var(--brand-dark);
+  color: #fff;
+  padding: 16px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ----------------------------------------------------------
+   SECTION BASE
+---------------------------------------------------------- */
+.section { padding: 100px 48px; }
+.section-inner { max-width: 900px; margin: 0 auto; }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--brand-dark);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.section-text { font-size: 16px; color: #555; line-height: 1.9; }
+
+/* ----------------------------------------------------------
+   NUMBERS BAR
+---------------------------------------------------------- */
+.numbers-bar {
+  background: var(--brand-dark);
+  padding: 60px 48px;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+.num-item { text-align: center; color: #fff; }
+.num-value { font-size: 52px; font-weight: 800; line-height: 1; }
+.num-value span { font-size: 22px; color: var(--brand-purple); }
+.num-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; }
+
+/* ----------------------------------------------------------
+   CHALLENGES
+---------------------------------------------------------- */
+.challenges { background: var(--bg-light); }
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.challenge-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px 24px;
+  border-left: 4px solid var(--brand-dark);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.challenge-card h3 { font-size: 15px; font-weight: 700; color: var(--brand-dark); margin-bottom: 12px; }
+.challenge-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+/* ----------------------------------------------------------
+   SCOPE LIST
+---------------------------------------------------------- */
+.scope-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 48px;
+}
+.scope-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px;
+  background: var(--bg-light);
+  border-radius: 10px;
+}
+.scope-check {
+  width: 24px;
+  height: 24px;
+  background: var(--brand-dark);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.scope-icon { font-size: 22px; flex-shrink: 0; }
+.scope-item h4 { font-size: 15px; font-weight: 700; color: var(--brand-dark); margin-bottom: 6px; }
+.scope-item p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+/* ----------------------------------------------------------
+   FEATURES GRID (WHY BRAIDEA)
+---------------------------------------------------------- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.feature-card {
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  transition: border-color 0.2s;
+}
+.feature-card:hover { border-color: var(--brand-warm); }
+.feature-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-accent);
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.feature-icon { font-size: 36px; margin-bottom: 16px; }
+.feature-card h3 { font-size: 15px; font-weight: 700; color: var(--brand-dark); margin-bottom: 10px; }
+.feature-card p { font-size: 13px; color: #777; line-height: 1.7; }
+
+/* ----------------------------------------------------------
+   FLOW STEPS
+---------------------------------------------------------- */
+.flow-steps {
+  display: grid;
+  gap: 0;
+  margin-top: 48px;
+}
+.flow-step {
+  text-align: center;
+  padding: 32px 16px;
+  position: relative;
+}
+.flow-step:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #ddd;
+}
+.flow-step-num,
+.flow-num {
+  width: 48px;
+  height: 48px;
+  background: var(--brand-dark);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.flow-step h4 { font-size: 14px; font-weight: 700; color: var(--brand-dark); margin-bottom: 8px; }
+.flow-step p { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+
+/* ----------------------------------------------------------
+   FAQ
+---------------------------------------------------------- */
+.faq { background: var(--bg-light); }
+.faq-list { margin-top: 48px; }
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 24px 0;
+}
+/* card style variant */
+.faq-item.card-style {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px 32px;
+  border-bottom: none;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  margin-bottom: 16px;
+}
+.faq-q {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--brand-dark);
+  margin-bottom: 12px;
+  display: flex;
+  gap: 12px;
+}
+.faq-q::before {
+  content: "Q.";
+  color: var(--brand-accent);
+  flex-shrink: 0;
+}
+.faq-a {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.8;
+  padding-left: 28px;
+}
+
+/* ----------------------------------------------------------
+   COMPARE (SEO / Recruit pages)
+---------------------------------------------------------- */
+.compare-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+}
+.compare-card { border-radius: 12px; padding: 32px; }
+.compare-card.old { background: var(--bg-light); border: 1px solid var(--border); }
+.compare-card.new { background: var(--brand-dark); color: #fff; }
+.compare-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+.compare-card.new h3 { color: #fff; }
+.compare-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.compare-list li {
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.6;
+}
+.compare-card.old .compare-list li { color: var(--text-muted); }
+.compare-card.new .compare-list li { color: rgba(255,255,255,0.85); }
+.compare-card.old .compare-list li::before { content: "✗"; color: #ccc; flex-shrink: 0; margin-top: 2px; }
+.compare-card.new .compare-list li::before { content: "✓"; color: var(--brand-purple); flex-shrink: 0; margin-top: 2px; }
+
+/* ----------------------------------------------------------
+   CTA BLOCKS
+---------------------------------------------------------- */
+.cta-block {
+  background: var(--brand-dark);
+  padding: 80px 48px;
+  text-align: center;
+  color: #fff;
+}
+.cta-block h2 { font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+.cta-block p { font-size: 16px; opacity: 0.7; margin-bottom: 36px; }
+
+.bottom-cta {
+  background: var(--brand-dark);
+  padding: 100px 48px;
+  text-align: center;
+}
+.bottom-cta h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+.bottom-cta p { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 40px; }
+
+.cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+/* ----------------------------------------------------------
+   FOOTER
+---------------------------------------------------------- */
+footer {
+  background: #111;
+  color: rgba(255,255,255,0.5);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+
+/* ----------------------------------------------------------
+   SERVICE CTA LINK (services.html)
+---------------------------------------------------------- */
+.service-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--brand-dark);
+  text-decoration: none;
+  border: 1px solid var(--brand-dark);
+  padding: 12px 28px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.service-cta-link:hover {
+  background: var(--brand-dark);
+  color: #fff;
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+---------------------------------------------------------- */
+@media (max-width: 768px) {
+  header { padding: 12px 20px; margin-top: 0; }
+  header nav a { display: none; }
+  .page-hero { padding: 120px 20px 60px; }
+  .page-hero h1 { font-size: 28px; }
+  .section { padding: 60px 20px; }
+  .numbers-bar { gap: 32px; padding: 48px 20px; }
+  .num-value { font-size: 36px; }
+  .compare-wrap,
+  .challenge-grid,
+  .features-grid,
+  .scope-list { grid-template-columns: 1fr; }
+  .flow-steps { grid-template-columns: 1fr 1fr !important; }
+  .flow-step:not(:last-child)::after { display: none; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  footer { padding: 32px 20px; }
+}
