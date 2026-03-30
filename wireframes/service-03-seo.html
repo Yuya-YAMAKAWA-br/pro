@@ -57,7 +57,7 @@
     .feature-icon { font-size: 36px; margin-bottom: 16px; }
     .feature-card h3 { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
     .feature-card p { font-size: 14px; color: #777; line-height: 1.7; }
-    .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+    .flow-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 48px; }
     .flow-step { background: #f8f9fa; border-radius: 12px; padding: 28px 20px; text-align: center; position: relative; }
     .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); color: #ccc; font-size: 20px; }
     .flow-step-num { width: 40px; height: 40px; background: #1a1a2e; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; margin: 0 auto 16px; }
@@ -78,12 +78,16 @@
     footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
     footer .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
     footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    @media (max-width: 1100px) {
+      .flow-steps { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 768px) {
       header { padding: 12px 20px; } nav a { display: none; }
       .page-hero { padding: 120px 20px 60px; } .page-hero h1 { font-size: 28px; }
       .section { padding: 60px 20px; }
       .compare-wrap, .challenge-grid, .features-grid, .scope-list { grid-template-columns: 1fr; }
       .flow-steps { grid-template-columns: 1fr 1fr; }
+      .flow-steps .flow-step:not(:last-child)::after { display: none; }
     }
   </style>
 </head>
@@ -94,36 +98,69 @@
 <header>
   <a href="index.html" class="logo">BRAIDEA</a>
   <nav>
-    <a href="services.html">サービス一覧</a>
-    <a href="#">支援実績</a>
-    <a href="#">資料ダウンロード</a>
-    <a href="#">会社情報</a>
-    <a href="#cta" class="nav-cta">お問い合わせ</a>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+    <a href="index.html#flow">ご支援の流れ</a>
+    <a href="download.html">資料ダウンロード</a>
+    <a href="company.html">会社情報</a>
+    <a href="contact.html" class="nav-cta">お問い合わせ</a>
   </nav>
 </header>
 
 <div class="page-hero">
-  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; <a href="services.html">サービス</a> &gt; サイト改善</p>
+  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; <a href="services.html">サービス</a> &gt; SEOコンサルティング / LLMO対策</p>
   <div class="service-tag">SERVICE 03</div>
-  <h1>サイト改善</h1>
-  <p class="sub">LLMO / SEO / コンテンツマーケティング</p>
+  <h1>SEOコンサルティング<br>/ LLMO対策</h1>
+  <p class="sub">テクニカルSEO / コンテンツ戦略 / AI検索（LLMO）最適化</p>
   <p class="lead">
-    Google検索だけじゃない。ChatGPT・Perplexity・Geminiなど、AI検索にも「選ばれる」サイトへ。<br>
-    従来のSEOに加え、LLM（大規模言語モデル）に引用・推薦される「LLMO」対策を一気通貫で支援します。
+    データ分析と実行力で、Webサイトからの集客・売上向上という事業成果に繋げるSEOコンサルティング。<br>
+    単なる作業代行とは異なり、現状分析から課題特定・戦略立案・施策実行・効果検証まで<br>
+    一貫して伴走し、<strong>Webサイトを持続的な成果を生む資産へと導きます。</strong>
   </p>
   <div class="hero-cta-wrap">
-    <a href="#cta" class="btn-primary">無料相談はこちら</a>
-    <a href="#" class="btn-outline">資料ダウンロード</a>
+    <a href="contact.html" class="btn-primary">無料SEO診断を依頼する</a>
+    <a href="download.html" class="btn-outline">資料ダウンロード</a>
   </div>
 </div>
 
-<!-- LLMO vs SEO COMPARE -->
+<!-- SEO代行 vs コンサルティング COMPARE -->
 <section class="section" style="background: #f8f9fa;">
   <div class="section-inner">
-    <div class="section-label">LLMO vs SEO</div>
-    <h2 class="section-title">「LLMO」とは何か</h2>
-    <p class="section-text">検索行動が変化しています。ユーザーがGoogleではなくAIに質問する時代において、従来のSEOだけでは集客は限界を迎えています。</p>
+    <div class="section-label">CONSULTING vs AGENCY</div>
+    <h2 class="section-title">「SEO代行」と「SEOコンサルティング」の違い</h2>
+    <p class="section-text">施策を実行するだけの代行会社とは異なります。BRAIDEAは、データ分析に基づき「何をすべきか」を明確にし、貴社と<strong>チームの一員</strong>として競争優位性を確立するための本質的なコンサルティングを提供します。</p>
     <div class="compare-wrap">
+      <div class="compare-card old">
+        <h3>一般的なSEO代行</h3>
+        <ul class="compare-list">
+          <li>指示された作業を実行するのみ</li>
+          <li>戦略の説明・根拠が不透明</li>
+          <li>成果よりも作業量・本数で評価</li>
+          <li>サイトの全体像が見えていない</li>
+          <li>LLMOへの対応が遅れがち</li>
+        </ul>
+      </div>
+      <div class="compare-card new">
+        <h3>BRAIDEAのSEOコンサルティング</h3>
+        <ul class="compare-list">
+          <li>現状分析→課題特定→戦略立案を一貫担当</li>
+          <li>改善案の企画・実行サポート・効果検証まで伴走</li>
+          <li>数値モニタリングとレポーティングで透明性を確保</li>
+          <li>業界・サイトタイプ別の専任担当者がアサイン</li>
+          <li>技術的理解と独自研究を土台にLLMOにも完全対応</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LLMO vs SEO -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">LLMO vs SEO</div>
+    <h2 class="section-title">AI検索時代の新標準「LLMO」</h2>
+    <p class="section-text">ChatGPT・Perplexity・Geminiなど、ユーザーがGoogleではなくAIに質問する時代において、<strong>AIに選ばれるブランドになるための戦略と戦術</strong>が競争優位性を左右します。SEOとLLMOを統合した設計で、あらゆる検索接点からの集客を最大化します。</p>
+    <div class="compare-wrap" style="margin-top:40px;">
       <div class="compare-card old">
         <h3>従来のSEO</h3>
         <ul class="compare-list">
@@ -139,8 +176,8 @@
         <ul class="compare-list">
           <li>ChatGPT・Perplexity・Geminiへの最適化</li>
           <li>AI回答に「引用・推薦」されることが目標</li>
-          <li>信頼性・権威性・引用可能性が重要</li>
-          <li>構造化されたファクト情報の充実</li>
+          <li>信頼性・権威性・引用可能性が重要指標</li>
+          <li>構造化されたファクト情報・一次情報の充実</li>
           <li>SEOとの統合戦略で最大効果を発揮</li>
         </ul>
       </div>
@@ -181,52 +218,52 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="background:#f8f9fa;">
   <div class="section-inner">
     <div class="section-label">SCOPE OF SUPPORT</div>
     <h2 class="section-title">支援内容</h2>
-    <p class="section-text">事業課題を解決するための一手段としてLLMO/SEOを位置付け、目標に対して最短距離で走れる戦略を設計・実行します。</p>
+    <p class="section-text">事業目標達成に向け、現状分析・課題特定から戦略立案・ロードマップ策定・施策実行・効果検証・ネクストアクション策定まで、一貫してお客様と伴走します。定例ミーティングとチャットツールで円滑なコミュニケーションを図り、チームの一員として成果を追求します。</p>
     <div class="scope-list">
       <div class="scope-item">
         <div class="scope-check">✓</div>
         <div>
+          <h4>現状分析・課題特定・戦略立案</h4>
+          <p>サイト全体の健全性診断・競合分析・キーワード戦略設計を実施し、オーダーメイドのロードマップを策定します。</p>
+        </div>
+      </div>
+      <div class="scope-item">
+        <div class="scope-check">✓</div>
+        <div>
           <h4>LLMO対策（AI検索最適化）</h4>
-          <p>ChatGPT・Perplexity・Gemini等のAI検索エンジンに引用・推薦されるコンテンツ構造を設計します。</p>
+          <p>技術的理解と独自研究を土台に、ChatGPT・Perplexity・Gemini等のAI検索に引用・推薦されるコンテンツ構造を設計します。</p>
         </div>
       </div>
       <div class="scope-item">
         <div class="scope-check">✓</div>
         <div>
-          <h4>テクニカルSEO監査・改善</h4>
-          <p>サイト速度・クロール最適化・構造化データ・内部リンク等の技術的課題を特定し、改善します。</p>
+          <h4>テクニカルSEO監査・改善実行サポート</h4>
+          <p>クロール最適化・構造化データ・Core Web Vitals等の技術的課題を特定し、改善案の企画から実行まで支援します。</p>
         </div>
       </div>
       <div class="scope-item">
         <div class="scope-check">✓</div>
         <div>
-          <h4>コンテンツ戦略設計・記事制作</h4>
-          <p>キーワード戦略・競合分析・コンテンツカレンダーの設計から、記事制作・品質管理まで対応します。</p>
+          <h4>コンテンツ戦略設計・記事制作・リライト</h4>
+          <p>キーワード戦略・コンテンツカレンダー設計から記事制作・低品質コンテンツ対策まで対応。流入数200%改善の実績あり。</p>
         </div>
       </div>
       <div class="scope-item">
         <div class="scope-check">✓</div>
         <div>
-          <h4>オウンドメディア構築・運用</h4>
-          <p>ゼロからのオウンドメディア立ち上げから、既存メディアの改善・運用代行まで支援します。</p>
+          <h4>数値モニタリング・レポーティング・定例報告</h4>
+          <p>Search Console / GA4を活用した数値モニタリングと月次レポートで、効果検証とネクストアクションを継続的に提案します。</p>
         </div>
       </div>
       <div class="scope-item">
         <div class="scope-check">✓</div>
         <div>
-          <h4>Search Console / GA4を活用した効果測定</h4>
-          <p>流入・順位・CVRの変化をデータで可視化し、改善の優先順位を設計します。</p>
-        </div>
-      </div>
-      <div class="scope-item">
-        <div class="scope-check">✓</div>
-        <div>
-          <h4>インハウス化支援・コンテンツ内製化</h4>
-          <p>社内でコンテンツを自走できる体制構築・マニュアル整備・教育プログラムを提供します。</p>
+          <h4>SEO内製化・インハウス化支援</h4>
+          <p>仕組みや体制の構築だけでなく、実際に運用を担う担当者様のレベルアップまで含めたインハウス化を支援します。</p>
         </div>
       </div>
     </div>
@@ -239,34 +276,34 @@
     <h2 class="section-title">BRAIDEAが選ばれる理由</h2>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>LLMO × SEO の統合戦略</h3>
-        <p>従来のSEOとLLMO対策を統合した次世代の検索最適化戦略を提供。AI検索時代に対応した集客設計を行います。</p>
-      </div>
-      <div class="feature-card">
         <div class="feature-icon">🔬</div>
-        <h3>テクニカルSEOの専門性</h3>
-        <p>上場企業からスタートアップまで100サイト以上の支援実績。技術的課題の特定と改善を専門家が担当します。</p>
+        <h3>技術的理解と独自研究を土台に</h3>
+        <p>Googleのアルゴリズムへの深い技術的理解と、継続的な独自研究に基づいた施策設計。感覚や経験則ではなく、エビデンスで戦略を立案します。</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📝</div>
-        <h3>コンテンツを集客装置にとどめない</h3>
-        <p>コンテンツ単体での集客だけでなく、CVR改善・MAとの連携・広告との統合により成果を最大化します。</p>
+        <div class="feature-icon">🏆</div>
+        <h3>競争優位性を確立する本質的なコンサルティング</h3>
+        <p>作業を代行するだけでなく、貴社の事業・競合・ユーザーを深く理解したうえで「何をすべきか」を明確化。持続的に競合に勝てる構造を設計します。</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>データドリブンな戦略設計</h3>
-        <p>感覚的なコンテンツ制作ではなく、検索データ・競合分析・ユーザー行動データに基づいた戦略を設計します。</p>
+        <div class="feature-icon">📈</div>
+        <h3>持続的な成果を生む資産をつくる</h3>
+        <p>即効性の施策に留まらず、Webサイトを長期的に集客・売上を生み続ける資産へと育てます。コンテンツ・構造・権威性を複合的に強化します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👤</div>
+        <h3>業界・サイトタイプ別の専任担当者</h3>
+        <p>BtoBサービス・ECサイト・メディア・SaaSなど業種・サイトタイプ別に精通した担当者がアサイン。業界特有の検索行動に応じた戦略を提供します。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤝</div>
+        <h3>チームの一員として事業成果に伴走</h3>
+        <p>定例MTGとチャットでコミュニケーションを密に取り、課題を一緒に考えるパートナーとして機能。「報告書を渡して終わり」にはなりません。</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🏗️</div>
-        <h3>インハウス化まで見据えた支援</h3>
-        <p>外注代行だけでなく、社内でコンテンツを自走できる体制構築・ノウハウ移転まで一貫して対応します。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔗</div>
-        <h3>広告・LPとの横断連携</h3>
-        <p>SEOで集客したトラフィックをCV最大化するため、LP改善・広告との組み合わせで全体最適を実現します。</p>
+        <h3>SEO内製化・インハウス化まで見据えた支援</h3>
+        <p>外注依存から脱却し、社内でSEOを自走できる体制を構築。ノウハウ移転・担当者育成まで含めた真のインハウス化を支援します。</p>
       </div>
     </div>
   </div>
@@ -279,23 +316,33 @@
     <div class="flow-steps">
       <div class="flow-step">
         <div class="flow-step-num">1</div>
-        <h4>現状診断・監査</h4>
-        <p>サイト構造・コンテンツ・順位・流入データを分析</p>
+        <h4>現状分析・課題特定</h4>
+        <p>サイト診断・競合分析・流入データ分析で課題を特定</p>
       </div>
       <div class="flow-step">
         <div class="flow-step-num">2</div>
-        <h4>戦略設計</h4>
-        <p>LLMO/SEO戦略・コンテンツカレンダー・KPI設計</p>
+        <h4>戦略立案・ロードマップ策定</h4>
+        <p>KPI設計・優先施策整理・実行計画をオーダーメイドで策定</p>
       </div>
       <div class="flow-step">
         <div class="flow-step-num">3</div>
-        <h4>施策実行</h4>
-        <p>テクニカル改善・コンテンツ制作・内部施策実施</p>
+        <h4>改善案の企画・ご提案</h4>
+        <p>テクニカル・コンテンツ・LLMO対策の施策を具体的に企画</p>
       </div>
       <div class="flow-step">
         <div class="flow-step-num">4</div>
-        <h4>効果測定・改善</h4>
-        <p>月次レポート・順位・流入・CVの継続改善</p>
+        <h4>改善案の実行サポート</h4>
+        <p>施策の実行を並走。必要に応じて制作・修正も直接対応</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">5</div>
+        <h4>効果検証・ネクストアクション策定</h4>
+        <p>施策ごとの効果を検証し、次のアクションを継続的に提案</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">6</div>
+        <h4>数値モニタリング・定例報告会</h4>
+        <p>Search Console / GA4での継続モニタリングと月次レポーティング</p>
       </div>
     </div>
   </div>
@@ -307,31 +354,31 @@
     <h2 class="section-title">よくある質問</h2>
     <div class="faq-list">
       <div class="faq-item">
+        <div class="faq-q">他社のSEO代行とどう違うのですか？</div>
+        <div class="faq-a">一般的なSEO代行は「指定された作業を実行する」ことが主業務ですが、BRAIDEAは作業代行ではなくコンサルティングを提供しています。現状分析・課題特定・戦略立案から施策実行・効果検証まで、貴社と一緒に考え動くチームの一員として機能します。「何をすべきか」の判断ごとサポートする点が最大の違いです。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">開始までどのくらいかかりますか？</div>
+        <div class="faq-a">お問い合わせから1〜2週間でのご支援開始が可能です。まずはヒアリングと現状診断を行い、ロードマップを策定した上でご契約となります。お急ぎの方はお気軽にご相談ください。</div>
+      </div>
+      <div class="faq-item">
         <div class="faq-q">LLMOとSEOは別々に依頼する必要がありますか？</div>
-        <div class="faq-a">いいえ。BRAIDEAではLLMOとSEOを統合した戦略として提供しています。両方を一貫した戦略の下で最適化することで、相乗効果が生まれます。</div>
+        <div class="faq-a">いいえ。BRAIDEAではLLMOとSEOを統合した戦略として提供しています。技術的理解と独自研究を土台に、両方を一貫した戦略の下で最適化することで相乗効果が生まれます。</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">成果が出るまでどのくらいかかりますか？</div>
-        <div class="faq-a">テクニカルSEOの改善は早ければ1〜3ヶ月で効果が出ることがあります。コンテンツSEOは3〜6ヶ月を目安としています。LLMOは施策から2〜4ヶ月での変化が見られます。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">記事制作は何本くらいから対応していますか？</div>
-        <div class="faq-a">月2本〜対応しています。戦略に応じた本数を設計しますので、まずはご相談ください。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">既存のコンテンツのリライトも対応していますか？</div>
-        <div class="faq-a">はい。既存記事の品質監査・優先度の高い記事のリライトも支援の対象です。</div>
+        <div class="faq-q">SEOをいずれ内製化したいのですが対応できますか？</div>
+        <div class="faq-a">はい。SEO内製化・インハウス化は得意領域の一つです。仕組みや体制の構築だけでなく、担当者様のスキルアップ・ノウハウ移転まで含めた支援を行います。外注依存から自走できる組織へのシフトを一貫してサポートします。</div>
       </div>
     </div>
   </div>
 </section>
 
 <div class="cta-block" id="cta">
-  <h2>まずは現状のSEO診断をご依頼ください</h2>
-  <p>サイトの課題・改善ポイントを無料でお伝えします。</p>
+  <h2>事業成果に繋がるSEOを、<br>今すぐ始めましょう</h2>
+  <p>まずは現状のSEO診断から。課題・改善ポイント・優先施策を整理してお伝えします。<br>お問い合わせから1〜2週間でご支援を開始できます。</p>
   <div class="cta-buttons">
-    <a href="#" class="btn-white">無料SEO診断を依頼する</a>
-    <a href="#" class="btn-ghost">資料ダウンロード</a>
+    <a href="contact.html" class="btn-white">無料SEO診断を依頼する</a>
+    <a href="download.html" class="btn-ghost">資料ダウンロード</a>
   </div>
 </div>
 

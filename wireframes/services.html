@@ -104,11 +104,13 @@
     }
     .overview-arms {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .overview-arms { grid-template-columns: 1fr 1fr; }
     }
     .overview-arm {
       background: #f8f9fa;
@@ -404,6 +406,30 @@
       <div class="arm-num">4</div>
       <h3>LPO / UI・UX / 解析 / AI導入</h3>
       <p>データドリブンなLP改善<br>生成AIの業務導入支援</p>
+      <div style="margin-top:12px;font-size:12px;color:#4a6cf7;font-weight:600;">詳細を見る →</div>
+    </a>
+    <a href="service-05-content.html" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">5</div>
+      <h3>コンテンツマーケティング / オウンドメディア</h3>
+      <p>戦略設計〜記事制作〜<br>オウンドメディア運用</p>
+      <div style="margin-top:12px;font-size:12px;color:#4a6cf7;font-weight:600;">詳細を見る →</div>
+    </a>
+    <a href="service-06-sns.html" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">6</div>
+      <h3>SNS運用・アカウント運用</h3>
+      <p>Instagram / X / LinkedIn<br>TikTok / YouTube</p>
+      <div style="margin-top:12px;font-size:12px;color:#4a6cf7;font-weight:600;">詳細を見る →</div>
+    </a>
+    <a href="service-07-email.html" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">7</div>
+      <h3>メールマーケティング / MA・CRM</h3>
+      <p>ナーチャリング設計〜MAツール<br>導入〜商談創出の仕組み化</p>
+      <div style="margin-top:12px;font-size:12px;color:#4a6cf7;font-weight:600;">詳細を見る →</div>
+    </a>
+    <a href="service-08-inhouse.html" class="overview-arm" style="text-decoration:none;">
+      <div class="arm-num">8</div>
+      <h3>マーケティング組織開発・インハウス化</h3>
+      <p>組織設計〜人材育成〜<br>自走できるチームづくり</p>
       <div style="margin-top:12px;font-size:12px;color:#4a6cf7;font-weight:600;">詳細を見る →</div>
     </a>
   </div>

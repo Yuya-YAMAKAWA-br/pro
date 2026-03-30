@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マーケティング組織開発・インハウス化支援 | BRAIDEA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; line-height: 1.8; }
+    .wf-note { background: #FFFDE7; border: 2px dashed #FFC107; padding: 12px 24px; font-size: 13px; color: #795548; text-align: center; position: sticky; top: 0; z-index: 9999; }
+    header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 16px 48px; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid #eee; margin-top: 38px; }
+    .logo { font-size: 22px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 28px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 22px; border-radius: 6px; font-weight: 600; }
+    .page-hero { padding: 160px 48px 100px; background: linear-gradient(160deg, #f8f9fa 0%, #fff 100%); border-bottom: 1px solid #eee; }
+    .page-hero .breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 20px; }
+    .page-hero .breadcrumb a { color: #aaa; text-decoration: none; }
+    .page-hero .service-tag { display: inline-block; background: #1a1a2e; color: #fff; font-size: 11px; letter-spacing: 3px; padding: 6px 16px; border-radius: 20px; margin-bottom: 20px; }
+    .page-hero h1 { font-size: 42px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; line-height: 1.3; }
+    .page-hero .sub { font-size: 18px; color: #888; margin-bottom: 20px; }
+    .page-hero .lead { font-size: 17px; color: #555; max-width: 700px; line-height: 1.9; margin-bottom: 40px; }
+    .hero-cta-wrap { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: #1a1a2e; color: #fff; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    .btn-outline { display: inline-block; border: 2px solid #1a1a2e; color: #1a1a2e; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; }
+    .section { padding: 100px 48px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #4a6cf7; margin-bottom: 12px; font-weight: 600; }
+    .section-title { font-size: 32px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; line-height: 1.4; }
+    .section-text { font-size: 16px; color: #555; line-height: 1.9; }
+    .numbers-bar { background: #1a1a2e; padding: 60px 48px; display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; }
+    .num-item { text-align: center; color: #fff; }
+    .num-value { font-size: 52px; font-weight: 800; line-height: 1; }
+    .num-value span { font-size: 22px; color: #a78bfa; }
+    .num-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; }
+    .challenges { background: #f8f9fa; }
+    .challenge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .challenge-card { background: #fff; border-radius: 12px; padding: 32px 24px; border-left: 4px solid #1a1a2e; box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+    .challenge-card h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .challenge-card p { font-size: 13px; color: #888; line-height: 1.7; }
+    /* Roadmap */
+    .roadmap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .roadmap-card { border-radius: 12px; padding: 32px 28px; position: relative; }
+    .roadmap-card.phase1 { background: #f8f9fa; border: 2px solid #eee; }
+    .roadmap-card.phase2 { background: #eef0fe; border: 2px solid #c7ceff; }
+    .roadmap-card.phase3 { background: #1a1a2e; color: #fff; }
+    .roadmap-phase { font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 12px; }
+    .roadmap-card.phase1 .roadmap-phase { color: #4a6cf7; }
+    .roadmap-card.phase2 .roadmap-phase { color: #4a6cf7; }
+    .roadmap-card.phase3 .roadmap-phase { color: #a78bfa; }
+    .roadmap-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .roadmap-card.phase3 h3 { color: #fff; }
+    .roadmap-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .roadmap-list li { font-size: 13px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.6; }
+    .roadmap-card.phase3 .roadmap-list li { color: rgba(255,255,255,0.8); }
+    .roadmap-list li::before { content: "›"; font-weight: 700; flex-shrink: 0; }
+    .roadmap-card.phase1 .roadmap-list li::before { color: #4a6cf7; }
+    .roadmap-card.phase2 .roadmap-list li::before { color: #4a6cf7; }
+    .roadmap-card.phase3 .roadmap-list li::before { color: #a78bfa; }
+    .scope-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+    .scope-item { display: flex; align-items: flex-start; gap: 14px; padding: 20px; background: #f8f9fa; border-radius: 10px; }
+    .scope-icon { font-size: 22px; flex-shrink: 0; }
+    .scope-item h4 { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .scope-item p { font-size: 13px; color: #888; line-height: 1.6; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .feature-card { border: 1.5px solid #eee; border-radius: 12px; padding: 28px 24px; }
+    .feature-num { font-size: 11px; font-weight: 700; color: #4a6cf7; letter-spacing: 2px; margin-bottom: 12px; }
+    .feature-card h3 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; }
+    .feature-card p { font-size: 13px; color: #888; line-height: 1.7; }
+    .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 48px; }
+    .flow-step { text-align: center; padding: 32px 20px; position: relative; }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); font-size: 20px; color: #ddd; }
+    .flow-num { width: 48px; height: 48px; background: #1a1a2e; color: #fff; border-radius: 50%; font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .flow-step h4 { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+    .flow-step p { font-size: 12px; color: #888; line-height: 1.6; }
+    .faq-list { margin-top: 48px; }
+    .faq-item { border-bottom: 1px solid #eee; padding: 24px 0; }
+    .faq-q { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; display: flex; gap: 12px; }
+    .faq-q::before { content: "Q."; color: #4a6cf7; flex-shrink: 0; }
+    .faq-a { font-size: 14px; color: #666; line-height: 1.8; padding-left: 28px; }
+    .bottom-cta { background: #1a1a2e; padding: 100px 48px; text-align: center; }
+    .bottom-cta h2 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 16px; line-height: 1.4; }
+    .bottom-cta p { font-size: 16px; color: rgba(255,255,255,0.65); margin-bottom: 40px; }
+    .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
+    .btn-outline-white { border: 2px solid rgba(255,255,255,0.4); color: #fff; padding: 14px 40px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; }
+    footer { background: #111; color: rgba(255,255,255,0.5); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 16px; }
+    .footer-logo { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    @media(max-width:768px){header{padding:12px 20px;}nav a{display:none;}.page-hero{padding:120px 20px 60px;}.page-hero h1{font-size:28px;}.section{padding:60px 20px;}.numbers-bar{gap:32px;padding:48px 20px;}.num-value{font-size:36px;}.challenge-grid,.features-grid,.roadmap{grid-template-columns:1fr;}.scope-list{grid-template-columns:1fr;}.flow-steps{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+<div class="wf-note"><strong>WIREFRAME</strong> — SERVICE 08 マーケティング組織開発・インハウス化支援</div>
+
+<header>
+  <a href="index.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+    <a href="index.html#flow">ご支援の流れ</a>
+    <a href="download.html">資料ダウンロード</a>
+    <a href="company.html">会社情報</a>
+    <a href="contact.html" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="index.html">TOP</a> &gt; <a href="services.html">サービス</a> &gt; マーケティング組織開発・インハウス化支援</p>
+  <div class="service-tag">SERVICE 08</div>
+  <h1>マーケティング組織開発<br>/ インハウス化支援</h1>
+  <p class="sub">組織設計 / 人材育成 / 体制構築 / 内製化支援</p>
+  <p class="lead">「外注依存でノウハウが社内に溜まらない」「マーケ担当を採用したが育て方がわからない」——<br>
+  BRAIDEAは、マーケティング組織の立ち上げから既存チームの強化・インハウス化まで、<br>自走できる組織づくりを伴走支援します。</p>
+  <div class="hero-cta-wrap">
+    <a href="contact.html" class="btn-primary">無料相談を申し込む</a>
+    <a href="download.html" class="btn-outline">資料をダウンロード</a>
+  </div>
+</div>
+
+<div class="numbers-bar">
+  <div class="num-item"><div class="num-value">40<span>+</span></div><div class="num-label">組織開発・インハウス化支援実績</div></div>
+  <div class="num-item"><div class="num-value">200<span>+</span></div><div class="num-label">育成・研修支援人数</div></div>
+  <div class="num-item"><div class="num-value">12<span>ヶ月</span></div><div class="num-label">平均インハウス化達成期間</div></div>
+  <div class="num-item"><div class="num-value">88<span>%</span></div><div class="num-label">自走達成率</div></div>
+</div>
+
+<section class="section challenges">
+  <div class="section-inner">
+    <div class="section-label">CHALLENGES</div>
+    <h2 class="section-title">こんな課題を抱えていませんか？</h2>
+    <div class="challenge-grid">
+      <div class="challenge-card"><h3>外注に頼りすぎてノウハウが溜まらない</h3><p>代理店や外注パートナーに任せっきりで、社内にマーケティングの知見が蓄積されていない。</p></div>
+      <div class="challenge-card"><h3>マーケ担当を採用したが育て方がわからない</h3><p>若手や異職種からの転換メンバーを採用したものの、育成プランも評価基準も整備されていない。</p></div>
+      <div class="challenge-card"><h3>マーケ部門を新設したいが設計方法が不明</h3><p>マーケティング組織をゼロから立ち上げたいが、どんな役割・人員構成が必要かわからない。</p></div>
+      <div class="challenge-card"><h3>担当者が辞めると施策が止まる</h3><p>特定の担当者に依存した運用になっており、退職・異動のたびにノウハウがリセットされる。</p></div>
+      <div class="challenge-card"><h3>各施策が分断されていて全体最適ができない</h3><p>広告・SEO・SNS・コンテンツがそれぞれ別の担当・部署で動いており、連携が取れていない。</p></div>
+      <div class="challenge-card"><h3>経営陣とマーケの共通言語がない</h3><p>マーケの成果を経営指標（売上・ROI）で説明できず、予算獲得や優先度設定が難しい。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">ROADMAP</div>
+    <h2 class="section-title">インハウス化の3つのフェーズ</h2>
+    <p class="section-text">外注依存から内製化まで、現状に応じた3フェーズで段階的に組織を強化します。</p>
+    <div class="roadmap">
+      <div class="roadmap-card phase1">
+        <div class="roadmap-phase">PHASE 01</div>
+        <h3>現状診断・<br>組織設計</h3>
+        <ul class="roadmap-list">
+          <li>マーケ組織・体制の現状診断</li>
+          <li>ロールデザイン・KPI設計</li>
+          <li>採用要件・育成計画の策定</li>
+          <li>外注先との役割分担整理</li>
+        </ul>
+      </div>
+      <div class="roadmap-card phase2">
+        <div class="roadmap-phase">PHASE 02</div>
+        <h3>伴走支援・<br>スキル移転</h3>
+        <ul class="roadmap-list">
+          <li>実務を通じたOJTスタイル育成</li>
+          <li>施策ごとのマニュアル整備</li>
+          <li>ワークショップ・研修の実施</li>
+          <li>ツール選定・運用ルール策定</li>
+        </ul>
+      </div>
+      <div class="roadmap-card phase3">
+        <div class="roadmap-phase">PHASE 03</div>
+        <h3>自走化・<br>継続改善</h3>
+        <ul class="roadmap-list">
+          <li>社内チームの独立運用開始</li>
+          <li>定例レビュー・顧問支援に移行</li>
+          <li>採用・評価制度への組み込み</li>
+          <li>次フェーズの成長戦略立案</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#f8f9fa;">
+  <div class="section-inner">
+    <div class="section-label">WHAT WE DO</div>
+    <h2 class="section-title">支援内容</h2>
+    <div class="scope-list">
+      <div class="scope-item"><div class="scope-icon">🏗️</div><div><h4>マーケティング組織の立ち上げ設計</h4><p>役割定義・人員構成・KPI設計・ツール選定など、組織ゼロからの構築を支援。</p></div></div>
+      <div class="scope-item"><div class="scope-icon">👩‍💼</div><div><h4>採用要件定義・面接支援</h4><p>マーケ担当者・マネージャーの採用要件の整備と選考プロセスへの参画支援。</p></div></div>
+      <div class="scope-item"><div class="scope-icon">📚</div><div><h4>育成プログラム・ワークショップ設計</h4><p>実務に直結したカリキュラム設計と、ハンズオン型のワークショップ実施。</p></div></div>
+      <div class="scope-item"><div class="scope-icon">📋</div><div><h4>施策マニュアル・SOP整備</h4><p>広告・SEO・SNS等の施策ごとの標準作業手順書（SOP）を整備し属人化を解消。</p></div></div>
+      <div class="scope-item"><div class="scope-icon">🤝</div><div><h4>外注パートナーとの役割分担整理</h4><p>代理店・フリーランスとの業務分担を再設計し、内製と外注の最適バランスを構築。</p></div></div>
+      <div class="scope-item"><div class="scope-icon">📈</div><div><h4>顧問・アドバイザリー支援</h4><p>自走後も月次定例・相談対応で継続的なグロースを支援する顧問プランも提供。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">WHY BRAIDEA</div>
+    <h2 class="section-title">BRAIDEAが選ばれる6つの理由</h2>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-num">POINT 01</div><h3>「自走」にコミットする伴走スタイル</h3><p>依存関係を作らない支援を方針とし、社内チームが自走できる状態を最終ゴールとして設定します。</p></div>
+      <div class="feature-card"><div class="feature-num">POINT 02</div><h3>実務経験者によるOJT育成</h3><p>研修だけでなく実際の施策を通じた現場OJTで、すぐ使えるスキルを習得できます。</p></div>
+      <div class="feature-card"><div class="feature-num">POINT 03</div><h3>全施策領域をカバーする知見</h3><p>広告・SEO・SNS・コンテンツ・MAなど全領域のノウハウを持つため、横断的な組織設計が可能です。</p></div>
+      <div class="feature-card"><div class="feature-num">POINT 04</div><h3>経営視点でのKPI設計</h3><p>マーケの施策を売上・ROI・LTVと結びつけ、経営陣への説明力を持てる組織づくりを支援。</p></div>
+      <div class="feature-card"><div class="feature-num">POINT 05</div><h3>採用から育成まで一気通貫</h3><p>採用要件の定義・面接支援・入社後の育成まで、人材面での組織強化を包括的にサポート。</p></div>
+      <div class="feature-card"><div class="feature-num">POINT 06</div><h3>生成AI活用を組み込んだ体制設計</h3><p>ChatGPT / Claude等を業務に組み込み、少人数でも高いアウトプットが出せる組織を構築します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#f8f9fa;">
+  <div class="section-inner">
+    <div class="section-label">FLOW</div>
+    <h2 class="section-title">支援の流れ</h2>
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-num">1</div><h4>組織診断・ゴール設定</h4><p>現状の体制・スキル・課題を整理し、インハウス化のゴールと期間を設定。</p></div>
+      <div class="flow-step"><div class="flow-num">2</div><h4>育成計画・マニュアル整備</h4><p>ロールごとの育成プラン・SOP・ツール選定を行い、組織の基盤を整備。</p></div>
+      <div class="flow-step"><div class="flow-num">3</div><h4>OJT・ワークショップ実施</h4><p>実務を通じた育成と定期的なワークショップで、スキルと自信を着実に積み上げる。</p></div>
+      <div class="flow-step"><div class="flow-num">4</div><h4>自走・顧問支援へ移行</h4><p>独立運用開始後も月次定例・相談対応で継続的なグロースをサポート。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">よくあるご質問</h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">マーケ担当が1名もいない状態から支援してもらえますか？</div><div class="faq-a">はい。採用要件の定義・面接支援から入社後の育成まで、ゼロからの組織構築に対応しています。採用前の段階での体制設計相談も歓迎です。</div></div>
+      <div class="faq-item"><div class="faq-q">完全インハウス化は難しい場合はどうなりますか？</div><div class="faq-a">完全内製化がゴールでなくても問題ありません。「コア業務は内製、専門領域は外注」というハイブリッド体制の構築も支援しています。</div></div>
+      <div class="faq-item"><div class="faq-q">研修・ワークショップはどのような形式で実施しますか？</div><div class="faq-a">オンライン・オフライン両方に対応しています。座学型の研修だけでなく、実際の施策を題材にしたハンズオン型ワークショップが中心です。</div></div>
+      <div class="faq-item"><div class="faq-q">自走後も継続的にサポートしてもらえますか？</div><div class="faq-a">はい。月次定例・Slack相談対応・四半期レビューなどの顧問プランをご用意しています。独立後も必要なときに頼れる体制を維持できます。</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <h2>マーケティングを、<br>「外注する力」から「自社の力」へ。</h2>
+  <p>まずは貴社のマーケ組織の現状をヒアリングします。</p>
+  <div class="cta-buttons">
+    <a href="contact.html" class="btn-white">無料相談を申し込む</a>
+    <a href="download.html" class="btn-outline-white">資料をダウンロード</a>
+  </div>
+</section>
+
+<footer>
+  <div><div class="footer-logo">BRAIDEA</div><p style="margin-top:8px;">© 2025 BRAIDEA Inc. All rights reserved.</p></div>
+  <div><a href="#">プライバシーポリシー</a><a href="company.html">会社概要</a><a href="services.html">サービス一覧</a></div>
+</footer>
+</body>
+</html>
