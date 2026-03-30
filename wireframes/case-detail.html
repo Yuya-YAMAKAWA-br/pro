@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAIDEA - 支援事例詳細 ワイヤーフレーム</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
+
+    .wireframe-note {
+      background: #FFFDE7;
+      border: 2px dashed #FFC107;
+      padding: 16px 24px;
+      font-size: 13px;
+      color: #795548;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+    .wireframe-note strong { color: #E65100; }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 32px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    nav a:hover { color: #1a1a2e; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      padding: 120px 48px 0;
+      font-size: 13px;
+      color: #999;
+    }
+    .breadcrumb a { color: #999; text-decoration: none; }
+    .breadcrumb a:hover { color: #1a1a2e; }
+    .breadcrumb span { margin: 0 8px; }
+
+    /* PAGE HERO */
+    .case-hero {
+      padding: 32px 48px 60px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .case-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: #4a6cf7;
+      background: #eef0fe;
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+    .case-tag.tag-04 { color: #e65100; background: #fff3e0; }
+    .case-hero h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    .case-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: #888;
+    }
+    .case-meta-item strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #bbb;
+      margin-bottom: 4px;
+    }
+    .case-meta-item span {
+      color: #444;
+      font-weight: 500;
+    }
+
+    /* KEY VISUAL */
+    .key-visual {
+      max-width: 900px;
+      margin: 0 auto 60px;
+      padding: 0 48px;
+    }
+    .key-visual-img {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, #f0f2f5 0%, #e8ebf0 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      font-size: 14px;
+      border: 2px dashed #e0e0e0;
+    }
+
+    /* RESULTS BAR */
+    .results-bar {
+      background: #1a1a2e;
+      padding: 56px 48px;
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    .results-bar .label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+    .results-grid {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      flex-wrap: wrap;
+    }
+    .result-item {
+      text-align: center;
+      color: #fff;
+    }
+    .result-value {
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .result-value .unit {
+      font-size: 24px;
+      font-weight: 700;
+      color: #4a6cf7;
+    }
+    .result-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* BODY CONTENT */
+    .content-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+    .content-section {
+      margin-bottom: 72px;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #4a6cf7;
+      margin-bottom: 12px;
+    }
+    .content-section h2 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .content-section p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    /* CHALLENGE + SOLUTION COLUMNS */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 16px;
+    }
+    .col-box {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+    .col-box h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #eee;
+    }
+    .col-box h3.challenge { border-color: #ff7043; }
+    .col-box h3.solution { border-color: #4a6cf7; }
+    .col-box ul {
+      list-style: none;
+    }
+    .col-box ul li {
+      font-size: 14px;
+      color: #555;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.6;
+    }
+    .col-box ul li:last-child { border-bottom: none; }
+    .col-box ul li::before {
+      content: "→";
+      color: #4a6cf7;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .col-box.challenge-box ul li::before { content: "×"; color: #ff7043; }
+
+    /* TIMELINE */
+    .timeline {
+      margin-top: 16px;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 40px;
+      bottom: 0;
+      width: 2px;
+      background: #eee;
+    }
+    .timeline-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .timeline-content h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+    .timeline-content p {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+
+    /* VOICE */
+    .voice-box {
+      background: #f8f9fa;
+      border-left: 4px solid #4a6cf7;
+      border-radius: 0 12px 12px 0;
+      padding: 28px 32px;
+      margin-top: 16px;
+    }
+    .voice-box blockquote {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.9;
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .voice-meta {
+      font-size: 13px;
+      color: #999;
+      font-weight: 600;
+    }
+
+    /* RELATED CASES */
+    .related-section {
+      padding: 80px 48px;
+      background: #f8f9fa;
+    }
+    .related-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1a1a2e;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .related-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s;
+    }
+    .related-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .related-thumb {
+      height: 140px;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ccc;
+      font-size: 13px;
+    }
+    .related-thumb.own { background: linear-gradient(135deg, #1a1a2e, #2d3a6e); color: rgba(255,255,255,0.4); }
+    .related-body { padding: 20px; }
+    .related-client { font-size: 11px; color: #999; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+    .related-title { font-size: 14px; font-weight: 700; color: #1a1a2e; line-height: 1.4; }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      background: #1a1a2e;
+      padding: 80px 48px;
+      text-align: center;
+      color: #fff;
+    }
+    .bottom-cta h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    .bottom-cta p { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 36px; }
+    .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; }
+    .btn-outline-white { border: 2px solid rgba(255,255,255,0.5); color: #fff; padding: 16px 40px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; color: #fff; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 768px) {
+      header { padding: 16px 24px; }
+      nav a { display: none; }
+      .case-hero { padding: 32px 24px 48px; }
+      .key-visual { padding: 0 24px; }
+      .content-wrap { padding: 0 24px; }
+      .case-hero h1 { font-size: 26px; }
+      .two-col { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr; }
+      .results-grid { gap: 32px; }
+      .result-value { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wireframe-note">
+  <strong>WIREFRAME</strong> — 支援事例詳細ページ（テンプレート） / BRAIDEA リニューアル ／
+  ※このファイルはPRODIG社の事例を使ったテンプレートです。実際の数値・内容に差し替えてください。
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+    <a href="top.html#flow">ご支援の流れ</a>
+    <a href="#">資料ダウンロード</a>
+    <a href="company.html">会社情報</a>
+    <a href="#" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="top.html">TOP</a>
+  <span>›</span>
+  <a href="cases.html">支援事例</a>
+  <span>›</span>
+  株式会社PRODIG
+</div>
+
+<!-- PAGE HERO -->
+<div class="case-hero">
+  <div class="case-tags">
+    <span class="case-tag">デジタル集客</span>
+    <span class="case-tag tag-04">LPO / UI・UX</span>
+  </div>
+  <h1>中古スマートフォン EC事業の<br>広告ROAS改善とLP最適化で<br>月間問い合わせ数を1.8倍に</h1>
+  <div class="case-meta">
+    <div class="case-meta-item">
+      <strong>クライアント</strong>
+      <span>株式会社PRODIG</span>
+    </div>
+    <div class="case-meta-item">
+      <strong>業種</strong>
+      <span>リユースモバイル / EC・BtoB</span>
+    </div>
+    <div class="case-meta-item">
+      <strong>支援期間</strong>
+      <span>6ヶ月</span>
+    </div>
+    <div class="case-meta-item">
+      <strong>支援サービス</strong>
+      <span>デジタル集客 / LPO</span>
+    </div>
+  </div>
+</div>
+
+<!-- KEY VISUAL -->
+<div class="key-visual">
+  <div class="key-visual-img">
+    クライアントのキービジュアル ／ サービス・製品イメージ画像<br>
+    （横幅フル・高さ400px程度 / 実際の画像に差し替え）
+  </div>
+</div>
+
+<!-- RESULTS BAR -->
+<div class="results-bar">
+  <div class="label">RESULTS — 支援後の変化</div>
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-value">3.4<span class="unit">x</span></div>
+      <div class="result-label">広告ROAS改善（支援前比）</div>
+    </div>
+    <div class="result-item">
+      <div class="result-value">+<span class="unit">180</span>%</div>
+      <div class="result-label">月間問い合わせ数</div>
+    </div>
+    <div class="result-item">
+      <div class="result-value">2.1<span class="unit">x</span></div>
+      <div class="result-label">ランディングページCVR</div>
+    </div>
+    <div class="result-item">
+      <div class="result-value">-<span class="unit">38</span>%</div>
+      <div class="result-label">顧客獲得単価（CPA）</div>
+    </div>
+  </div>
+</div>
+
+<!-- BODY CONTENT -->
+<div class="content-wrap">
+
+  <!-- 01. BACKGROUND -->
+  <div class="content-section">
+    <div class="section-label">BACKGROUND</div>
+    <h2>プロジェクトの背景</h2>
+    <p>
+      株式会社PRODIGは、リユースモバイル（中古スマートフォン・タブレット）の
+      リファビッシュ（再整備）および流通を手がける成長企業です。設立から4年で売上500%成長を達成し、
+      EC・BtoB両軸での事業拡大を進めていました。
+    </p>
+    <p>
+      急速な事業拡大の一方、デジタルマーケティングの体制は追いついておらず、
+      Google広告のROASが目標を下回る状態が続いていました。また、
+      BtoB向けランディングページの問い合わせ率も低く、せっかく流入した法人顧客を
+      取りこぼしている課題がありました。
+    </p>
+  </div>
+
+  <!-- 02. CHALLENGE & SOLUTION -->
+  <div class="content-section">
+    <div class="section-label">CHALLENGE & SOLUTION</div>
+    <h2>課題と解決アプローチ</h2>
+    <div class="two-col">
+      <div class="col-box challenge-box">
+        <h3 class="challenge">❌ 支援前の課題</h3>
+        <ul>
+          <li>広告キャンペーン構成が最適化されておらず、ROAS が目標の半分以下</li>
+          <li>BtoB・一般消費者向けのターゲティングが混在し、CPAが高騰</li>
+          <li>LPの訴求が商品スペック中心で、法人購買の意思決定に刺さらない</li>
+          <li>ヒートマップ分析を行っておらず、離脱ポイントが不明</li>
+          <li>A/Bテストの仕組みが未整備で、改善の根拠がない</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <h3 class="solution">✓ BRAIDEAの解決アプローチ</h3>
+        <ul>
+          <li>キャンペーン構造をBtoB / BtoC に完全分離し、入札戦略を最適化</li>
+          <li>顧客セグメント別のクリエイティブA/Bテストを実施し、CTR改善</li>
+          <li>法人向けLPをゼロから設計し直し、社会的証明と信頼性を前面化</li>
+          <li>GA4 + ヒートマップ導入で離脱ポイントを特定し、UX改善を実施</li>
+          <li>週次でPDCAサイクルを回し、月次で施策インパクトを定量評価</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03. PROCESS -->
+  <div class="content-section">
+    <div class="section-label">PROCESS</div>
+    <h2>支援プロセス</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">1</div>
+        <div class="timeline-content">
+          <h4>現状診断・課題整理（1〜2週目）</h4>
+          <p>広告アカウント全体の審査、GA4データの分析、競合調査を実施。
+             優先度の高い改善テーマを特定し、KPIと目標値を設定。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">2</div>
+        <div class="timeline-content">
+          <h4>広告構造の再設計・LPリニューアル（3〜6週目）</h4>
+          <p>BtoB・BtoC分離によるキャンペーン再構成を実施。
+             法人向けLPはファーストビューから訴求を一新し、
+             問い合わせフォームのUXも改善。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">3</div>
+        <div class="timeline-content">
+          <h4>クリエイティブA/Bテスト・継続最適化（7〜16週目）</h4>
+          <p>バナー・見出し・CTAボタンを軸に複数パターンのA/Bテストを実施。
+             週次レポートで改善仮説を検証しながらROASを段階的に引き上げ。</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">4</div>
+        <div class="timeline-content">
+          <h4>成果確認・次フェーズ戦略立案（17〜24週目）</h4>
+          <p>目標ROAS達成を確認した後、SNS広告（LinkedIn / Meta）への
+             チャネル拡張と、SEO戦略の立案に着手。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04. CLIENT VOICE -->
+  <div class="content-section">
+    <div class="section-label">CLIENT VOICE</div>
+    <h2>クライアントの声</h2>
+    <div class="voice-box">
+      <blockquote>
+        「広告費を使っているのに成果が見えない、という状態が続いていました。
+        BRAIDEAさんに入っていただいてから、数値の見方から改善の優先順位まで、
+        データに基づいて一緒に考えてもらえるようになりました。
+        半年でROASが3倍以上になり、法人向けの問い合わせも着実に増えています。
+        マーケティングに専任リソースを持てないスタートアップにとって、
+        こういう伴走スタイルは本当にありがたい。」
+      </blockquote>
+      <div class="voice-meta">株式会社PRODIG ／ 事業責任者</div>
+    </div>
+  </div>
+
+</div><!-- /content-wrap -->
+
+<!-- RELATED CASES -->
+<section class="related-section">
+  <h2>他の支援事例</h2>
+  <div class="related-grid">
+    <a href="case-detail.html" class="related-card">
+      <div class="related-thumb">
+        クライアント画像
+      </div>
+      <div class="related-body">
+        <div class="related-client">アイリボンテラキ</div>
+        <div class="related-title">EC専門店のオーガニック流入をSEO戦略で3倍増</div>
+      </div>
+    </a>
+    <a href="case-detail.html" class="related-card">
+      <div class="related-thumb own">
+        自社事業
+      </div>
+      <div class="related-body">
+        <div class="related-client">データスマート（自社事業）</div>
+        <div class="related-title">自社データ復旧サービスのリード獲得数を3.5倍に</div>
+      </div>
+    </a>
+    <a href="case-detail.html" class="related-card">
+      <div class="related-thumb own">
+        自社事業
+      </div>
+      <div class="related-body">
+        <div class="related-client">SMARTFIX（自社事業）</div>
+        <div class="related-title">iPhoneデリバリー修理の新規依頼を広告×LPOで2.6倍に</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>同じような課題を抱えていませんか？</h2>
+  <p>まずは貴社の現状を聞かせてください。無料相談を受け付けています。</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-white">無料相談を申し込む</a>
+    <a href="cases.html" class="btn-outline-white">事例一覧に戻る</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">BRAIDEA</div>
+    <p style="margin-top: 8px;">© 2025 BRAIDEA Inc. All rights reserved.</p>
+  </div>
+  <div>
+    <a href="#">プライバシーポリシー</a>
+    <a href="company.html">会社概要</a>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+  </div>
+</footer>
+
+</body>
+</html>
