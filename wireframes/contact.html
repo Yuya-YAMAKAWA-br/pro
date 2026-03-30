@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAIDEA - お問い合わせ ワイヤーフレーム</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
+
+    .wireframe-note {
+      background: #FFFDE7;
+      border: 2px dashed #FFC107;
+      padding: 16px 24px;
+      font-size: 13px;
+      color: #795548;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+    .wireframe-note strong { color: #E65100; }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 32px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    nav a:hover { color: #1a1a2e; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 160px 48px 60px;
+      text-align: center;
+      background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+    }
+    .page-hero .label { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #888; margin-bottom: 12px; }
+    .page-hero h1 { font-size: 40px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
+    .page-hero p { font-size: 16px; color: #666; line-height: 1.9; }
+
+    /* CONTENT LAYOUT */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      gap: 64px;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 60px 48px 100px;
+    }
+
+    /* LEFT — info */
+    .contact-info {}
+    .info-block {
+      margin-bottom: 40px;
+    }
+    .info-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #eee;
+    }
+    .info-block p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.9;
+    }
+
+    .step-list { list-style: none; }
+    .step-list li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text strong { display: block; font-size: 14px; color: #1a1a2e; margin-bottom: 2px; }
+    .step-text span { font-size: 13px; color: #888; }
+
+    .service-links { list-style: none; }
+    .service-links li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      text-decoration: none;
+      color: #444;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .service-links li a:hover { color: #4a6cf7; }
+    .service-links li a span { color: #ccc; }
+
+    /* RIGHT — form */
+    .contact-form-wrap {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 40px 36px;
+      height: fit-content;
+      position: sticky;
+      top: 100px;
+    }
+    .form-heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+    .form-lead {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+
+    .field-group { margin-bottom: 18px; }
+    .field-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #444;
+      margin-bottom: 6px;
+    }
+    .field-group label .req {
+      background: #1a1a2e;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-left: 6px;
+      font-weight: 600;
+    }
+    .field-group label .opt {
+      color: #bbb;
+      font-size: 11px;
+      font-weight: 400;
+      margin-left: 6px;
+    }
+    .field-group input,
+    .field-group textarea,
+    .field-group select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #333;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .field-group input:focus,
+    .field-group textarea:focus,
+    .field-group select:focus { border-color: #4a6cf7; }
+    .field-group input::placeholder,
+    .field-group textarea::placeholder { color: #ccc; }
+    .field-group textarea { height: 100px; resize: vertical; }
+
+    /* CHECKBOX GROUP */
+    .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+    }
+    .checkbox-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #4a6cf7;
+      cursor: pointer;
+    }
+
+    /* BUDGET RADIO */
+    .radio-group { display: flex; flex-direction: column; gap: 8px; }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      padding: 8px 12px;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 8px;
+      background: #fff;
+      transition: border-color 0.2s;
+    }
+    .radio-item:hover { border-color: #4a6cf7; }
+    .radio-item input[type="radio"] {
+      width: 15px;
+      height: 15px;
+      accent-color: #4a6cf7;
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: #2d3a6e; }
+    .submit-note {
+      font-size: 11px;
+      color: #bbb;
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.7;
+    }
+
+    /* COMPLETE STATE (hidden by default, shown after submit in JS) */
+    .form-complete {
+      display: none;
+      text-align: center;
+      padding: 40px 0;
+    }
+    .form-complete .check-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .form-complete h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 10px;
+    }
+    .form-complete p {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.8;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; color: #fff; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 800px) {
+      header { padding: 16px 24px; }
+      nav a { display: none; }
+      .page-hero { padding: 120px 24px 48px; }
+      .contact-layout { grid-template-columns: 1fr; padding: 40px 24px 80px; gap: 40px; }
+      .contact-form-wrap { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wireframe-note">
+  <strong>WIREFRAME</strong> — お問い合わせページ / BRAIDEA リニューアル ／
+  ※実装時はHubSpotフォームへ差し替え、またはPHP/静的フォームサービスで送信処理を追加。
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+    <a href="top.html#flow">ご支援の流れ</a>
+    <a href="download.html">資料ダウンロード</a>
+    <a href="company.html">会社情報</a>
+    <a href="contact.html" style="color:#1a1a2e;font-weight:700;" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="label">CONTACT</div>
+  <h1>お問い合わせ</h1>
+  <p>サービスのご相談・お見積りは無料です。<br>
+     まずはお気軽にご連絡ください。<br>
+     <strong style="color:#1a1a2e;">通常2営業日以内にご返信いたします。</strong></p>
+</div>
+
+<!-- CONTENT -->
+<div class="contact-layout">
+
+  <!-- LEFT: INFO -->
+  <div class="contact-info">
+
+    <div class="info-block">
+      <h3>ご相談の流れ</h3>
+      <ul class="step-list">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>フォームを送信</strong>
+            <span>右のフォームに必要事項を入力し、送信してください。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>担当者からご連絡（2営業日以内）</strong>
+            <span>内容を確認後、担当者よりメールにてご連絡します。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>オンライン無料相談（30〜60分）</strong>
+            <span>現状の課題や目標をヒアリング。Zoom / Google Meetにて実施。</span>
+          </div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>ご提案・お見積り</strong>
+            <span>ヒアリング内容をもとに、具体的な支援プランをご提案します。</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>サービスページ</h3>
+      <p style="margin-bottom:16px;">ご相談前に各サービスの詳細をご確認いただけます。</p>
+      <ul class="service-links">
+        <li><a href="service-01-marketing.html">総合マーケティング伴走 <span>→</span></a></li>
+        <li><a href="service-02-digital.html">デジタル集客（運用型広告） <span>→</span></a></li>
+        <li><a href="service-03-seo.html">サイト改善（LLMO / SEO） <span>→</span></a></li>
+        <li><a href="service-04-lpo.html">LPO / UI・UX / 解析 / 生成AI導入 <span>→</span></a></li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h3>直接のお問い合わせ</h3>
+      <p>メールでのご連絡も受け付けております。</p>
+      <p style="margin-top:12px;font-size:16px;font-weight:700;color:#1a1a2e;">
+        info@braidea.com
+      </p>
+      <p style="margin-top:8px;font-size:13px;color:#999;">
+        ※ 返信まで2営業日程度いただく場合があります。
+      </p>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="contact-form-wrap">
+    <div class="form-heading">無料相談を申し込む</div>
+    <div class="form-lead">フォームに入力後、担当者よりご連絡いたします。<br>すべての相談・見積りは無料です。</div>
+
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+
+      <div class="field-group">
+        <label>会社名 <span class="req">必須</span></label>
+        <input type="text" placeholder="株式会社〇〇" required>
+      </div>
+
+      <div class="field-group">
+        <label>お名前 <span class="req">必須</span></label>
+        <input type="text" placeholder="山田 太郎" required>
+      </div>
+
+      <div class="field-group">
+        <label>メールアドレス <span class="req">必須</span></label>
+        <input type="email" placeholder="taro@example.com" required>
+      </div>
+
+      <div class="field-group">
+        <label>電話番号 <span class="opt">任意</span></label>
+        <input type="tel" placeholder="03-0000-0000">
+      </div>
+
+      <div class="field-group">
+        <label>ご相談内容 <span class="req">必須</span><span class="opt">（複数選択可）</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox"> 総合マーケティング伴走</label>
+          <label class="checkbox-item"><input type="checkbox"> デジタル集客（広告運用）</label>
+          <label class="checkbox-item"><input type="checkbox"> サイト改善（LLMO / SEO）</label>
+          <label class="checkbox-item"><input type="checkbox"> LPO / UI・UX / 解析 / AI導入</label>
+          <label class="checkbox-item"><input type="checkbox"> その他・複数のサービスについて</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>ご予算感 <span class="opt">任意</span></label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="budget"> 〜50万円 / 月</label>
+          <label class="radio-item"><input type="radio" name="budget"> 50〜100万円 / 月</label>
+          <label class="radio-item"><input type="radio" name="budget"> 100万円〜 / 月</label>
+          <label class="radio-item"><input type="radio" name="budget"> 未定・まず相談したい</label>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>ご連絡内容 <span class="opt">任意</span></label>
+        <textarea placeholder="現状の課題や、お問い合わせの背景などをご記入ください。"></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">送信する →</button>
+      <div class="submit-note">
+        送信することで<a href="#" style="color:#999;">プライバシーポリシー</a>に同意したものとみなします。
+      </div>
+
+    </form>
+
+    <!-- 送信完了メッセージ -->
+    <div class="form-complete" id="formComplete">
+      <div class="check-icon">✅</div>
+      <h3>送信が完了しました</h3>
+      <p>お問い合わせありがとうございます。<br>
+         2営業日以内に担当者よりご連絡いたします。<br><br>
+         <a href="top.html" style="color:#4a6cf7;font-weight:600;">トップページへ戻る</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">BRAIDEA</div>
+    <p style="margin-top: 8px;">© 2025 BRAIDEA Inc. All rights reserved.</p>
+  </div>
+  <div>
+    <a href="#">プライバシーポリシー</a>
+    <a href="company.html">会社概要</a>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formComplete').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
