@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAIDEA - 資料ダウンロード ワイヤーフレーム</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
+
+    .wireframe-note {
+      background: #FFFDE7;
+      border: 2px dashed #FFC107;
+      padding: 16px 24px;
+      font-size: 13px;
+      color: #795548;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+    }
+    .wireframe-note strong { color: #E65100; }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
+    nav a { margin-left: 32px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
+    nav a:hover { color: #1a1a2e; }
+    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 160px 48px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+    }
+    .page-hero .label {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: 40px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .page-hero p {
+      font-size: 17px;
+      color: #666;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* WHITEPAPERS SECTION */
+    .wp-section {
+      padding: 0 48px 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* WHITEPAPER CARD — horizontal layout */
+    .wp-card {
+      display: grid;
+      grid-template-columns: 260px 1fr 320px;
+      gap: 0;
+      border: 1.5px solid #e8e8e8;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      background: #fff;
+      transition: box-shadow 0.2s;
+    }
+    .wp-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+    }
+
+    /* thumbnail */
+    .wp-thumb {
+      background: linear-gradient(160deg, #1a1a2e 0%, #2d3a6e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      color: #fff;
+      position: relative;
+    }
+    .wp-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+    .wp-cover {
+      width: 140px;
+      height: 180px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .wp-thumb-tag {
+      margin-top: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #4a6cf7;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* body */
+    .wp-body {
+      padding: 36px 36px 36px 40px;
+      border-right: 1px solid #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .wp-target {
+      font-size: 12px;
+      font-weight: 600;
+      color: #4a6cf7;
+      margin-bottom: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .target-badge {
+      background: #eef0fe;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+    .wp-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    .wp-subtitle {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+    .wp-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.8;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 18px;
+    }
+    .wp-contents {
+      list-style: none;
+      margin-top: 12px;
+    }
+    .wp-contents li {
+      font-size: 13px;
+      color: #777;
+      padding: 5px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .wp-contents li::before {
+      content: "▶";
+      font-size: 9px;
+      color: #4a6cf7;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* form panel */
+    .wp-form-panel {
+      background: #f8f9fa;
+      padding: 32px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+    .form-sub {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .form-field {
+      margin-bottom: 12px;
+    }
+    .form-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    .form-field label .req {
+      color: #e53935;
+      margin-left: 4px;
+    }
+    .form-field input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #333;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-field input:focus {
+      border-color: #4a6cf7;
+    }
+    .form-field input::placeholder {
+      color: #ccc;
+    }
+    .btn-download {
+      width: 100%;
+      padding: 14px;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .btn-download:hover { background: #2d3a6e; }
+    .form-note {
+      font-size: 11px;
+      color: #bbb;
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: #1a1a2e;
+      padding: 48px;
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      margin-bottom: 80px;
+    }
+    .trust-bar h3 {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .trust-items {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+    .trust-icon {
+      font-size: 18px;
+    }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      padding: 80px 48px;
+      text-align: center;
+      background: #f8f9fa;
+    }
+    .bottom-cta h2 { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .bottom-cta p { font-size: 16px; color: #888; margin-bottom: 36px; }
+    .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .btn-dark {
+      display: inline-block;
+      background: #1a1a2e; color: #fff;
+      padding: 16px 40px; border-radius: 8px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid #1a1a2e; color: #1a1a2e;
+      padding: 16px 40px; border-radius: 8px;
+      font-size: 15px; font-weight: 700; text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; color: #fff; }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
+    footer a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      header { padding: 16px 24px; }
+      nav a { display: none; }
+      .page-hero { padding: 120px 24px 60px; }
+      .wp-section { padding: 0 24px 80px; }
+      .wp-card {
+        grid-template-columns: 1fr;
+      }
+      .wp-thumb {
+        flex-direction: row;
+        gap: 24px;
+        padding: 24px;
+        justify-content: flex-start;
+      }
+      .wp-cover { width: 80px; height: 100px; flex-shrink: 0; }
+      .wp-num { display: none; }
+      .wp-body { border-right: none; border-bottom: 1px solid #f0f0f0; }
+      .trust-items { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wireframe-note">
+  <strong>WIREFRAME</strong> — 資料ダウンロードページ / BRAIDEA リニューアル ／
+  ※フォーム送信後は実際のPDFへのリンクまたはメール送付を想定。HubSpotフォームへの差し替えも可。
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="top.html" class="logo">BRAIDEA</a>
+  <nav>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+    <a href="top.html#flow">ご支援の流れ</a>
+    <a href="download.html" style="color:#1a1a2e;font-weight:700;">資料ダウンロード</a>
+    <a href="company.html">会社情報</a>
+    <a href="#" class="nav-cta">お問い合わせ</a>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="label">DOWNLOADS</div>
+  <h1>資料ダウンロード</h1>
+  <p>マーケティング担当者・事業責任者に向けた<br>実践ノウハウ資料を無料で公開しています。<br>
+     フォームにご記入いただくとすぐにダウンロードできます。</p>
+</div>
+
+<!-- WHITEPAPERS -->
+<section class="wp-section">
+
+  <!-- WP01 -->
+  <div class="wp-card" id="wp01">
+    <div class="wp-thumb">
+      <div class="wp-num">WHITEPAPER 01</div>
+      <div class="wp-cover">表紙イメージ<br>（PDF・A4縦）</div>
+      <div class="wp-thumb-tag">SEO / LLMO</div>
+    </div>
+    <div class="wp-body">
+      <div class="wp-target">
+        <span class="target-badge">Webマーケ担当者</span>
+        <span class="target-badge">事業責任者</span>
+      </div>
+      <div class="wp-title">LLMO/SEO × 生成AI時代の<br>集客戦略 完全ガイド</div>
+      <div class="wp-subtitle">ChatGPT・Perplexityに「選ばれる」コンテンツとは</div>
+      <div class="wp-desc">
+        従来のSEOだけでは戦えない時代が来ています。ChatGPT・Perplexity・Geminiなど
+        AI検索が普及した今、「LLMに引用される」コンテンツ設計が集客の鍵を握ります。
+        本資料では、LLMOとSEOの違いから具体的な施策まで、今すぐ動けるチェックリスト付きで解説します。
+        <ul class="wp-contents">
+          <li>従来SEOとLLMOの違いと優先度の考え方</li>
+          <li>AI検索エンジンへの最適化 5つのポイント</li>
+          <li>コンテンツ設計フレームワーク</li>
+          <li>今すぐ取り組むべき施策チェックリスト（20項目）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wp-form-panel">
+      <div class="form-title">無料でダウンロードする</div>
+      <div class="form-sub">ご登録後すぐにPDFをご覧いただけます。</div>
+      <div class="form-field">
+        <label>会社名 <span class="req">*</span></label>
+        <input type="text" placeholder="株式会社〇〇">
+      </div>
+      <div class="form-field">
+        <label>お名前 <span class="req">*</span></label>
+        <input type="text" placeholder="山田 太郎">
+      </div>
+      <div class="form-field">
+        <label>メールアドレス <span class="req">*</span></label>
+        <input type="email" placeholder="taro@example.com">
+      </div>
+      <button class="btn-download">ダウンロード →</button>
+      <div class="form-note">送信することでプライバシーポリシーに<br>同意したものとみなします。</div>
+    </div>
+  </div>
+
+  <!-- WP02 -->
+  <div class="wp-card" id="wp02">
+    <div class="wp-thumb" style="background: linear-gradient(160deg, #0d3b2e 0%, #0d7a5f 100%);">
+      <div class="wp-num">WHITEPAPER 02</div>
+      <div class="wp-cover">表紙イメージ<br>（PDF・A4縦）</div>
+      <div class="wp-thumb-tag" style="background:#0d7a5f;">デジタル広告</div>
+    </div>
+    <div class="wp-body">
+      <div class="wp-target">
+        <span class="target-badge" style="color:#0d7a5f;background:#e6f6f2;">広告担当者</span>
+        <span class="target-badge" style="color:#0d7a5f;background:#e6f6f2;">マーケ責任者</span>
+        <span class="target-badge" style="color:#0d7a5f;background:#e6f6f2;">経営者</span>
+      </div>
+      <div class="wp-title">成果が出る運用型広告の教科書</div>
+      <div class="wp-subtitle">ROAS改善に取り組む企業が実践している10の施策</div>
+      <div class="wp-desc">
+        「広告費を使っているのに成果が見えない」——その原因の大半は運用の質にあります。
+        本資料では、Google・Meta広告で実際にROASを改善した施策と、
+        無駄な広告費を削減するための具体的な改善チェックリストをご紹介します。
+        <ul class="wp-contents">
+          <li>ROAS改善のための広告構造の見直し方</li>
+          <li>クリエイティブA/Bテストの実践手順</li>
+          <li>BtoB向け広告設計の特殊ポイント</li>
+          <li>広告費の無駄を削減するチェックリスト（30項目）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wp-form-panel">
+      <div class="form-title">無料でダウンロードする</div>
+      <div class="form-sub">ご登録後すぐにPDFをご覧いただけます。</div>
+      <div class="form-field">
+        <label>会社名 <span class="req">*</span></label>
+        <input type="text" placeholder="株式会社〇〇">
+      </div>
+      <div class="form-field">
+        <label>お名前 <span class="req">*</span></label>
+        <input type="text" placeholder="山田 太郎">
+      </div>
+      <div class="form-field">
+        <label>メールアドレス <span class="req">*</span></label>
+        <input type="email" placeholder="taro@example.com">
+      </div>
+      <button class="btn-download" style="background:#0d3b2e;">ダウンロード →</button>
+      <div class="form-note">送信することでプライバシーポリシーに<br>同意したものとみなします。</div>
+    </div>
+  </div>
+
+  <!-- WP03 -->
+  <div class="wp-card" id="wp03">
+    <div class="wp-thumb" style="background: linear-gradient(160deg, #3a0d4e 0%, #7b1fa2 100%);">
+      <div class="wp-num">WHITEPAPER 03</div>
+      <div class="wp-cover">表紙イメージ<br>（PDF・A4縦）</div>
+      <div class="wp-thumb-tag" style="background:#7b1fa2;">LPO / CVR改善</div>
+    </div>
+    <div class="wp-body">
+      <div class="wp-target">
+        <span class="target-badge" style="color:#7b1fa2;background:#f3e5f5;">LP担当者</span>
+        <span class="target-badge" style="color:#7b1fa2;background:#f3e5f5;">Webディレクター</span>
+        <span class="target-badge" style="color:#7b1fa2;background:#f3e5f5;">マーケ担当</span>
+      </div>
+      <div class="wp-title">問い合わせ率3倍を実現した<br>LPO改善の進め方</div>
+      <div class="wp-subtitle">データ分析から施策実行まで、すぐ使える実践フレームワーク</div>
+      <div class="wp-desc">
+        集客できているのに問い合わせが増えない——それはLPに問題があります。
+        本資料では、ヒートマップ分析・A/Bテスト・フォーム最適化の具体的な手順と、
+        実際にCVRを改善した施策事例をフレームワークとともに解説します。
+        <ul class="wp-contents">
+          <li>LPO改善の優先順位の決め方（5ステップ）</li>
+          <li>ヒートマップを使った離脱ポイントの特定方法</li>
+          <li>A/Bテストの設計・判定基準の作り方</li>
+          <li>フォーム改善で問い合わせを増やす7つの施策</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wp-form-panel">
+      <div class="form-title">無料でダウンロードする</div>
+      <div class="form-sub">ご登録後すぐにPDFをご覧いただけます。</div>
+      <div class="form-field">
+        <label>会社名 <span class="req">*</span></label>
+        <input type="text" placeholder="株式会社〇〇">
+      </div>
+      <div class="form-field">
+        <label>お名前 <span class="req">*</span></label>
+        <input type="text" placeholder="山田 太郎">
+      </div>
+      <div class="form-field">
+        <label>メールアドレス <span class="req">*</span></label>
+        <input type="email" placeholder="taro@example.com">
+      </div>
+      <button class="btn-download" style="background:#3a0d4e;">ダウンロード →</button>
+      <div class="form-note">送信することでプライバシーポリシーに<br>同意したものとみなします。</div>
+    </div>
+  </div>
+
+  <!-- WP04 -->
+  <div class="wp-card" id="wp04">
+    <div class="wp-thumb" style="background: linear-gradient(160deg, #3a2000 0%, #e65100 100%);">
+      <div class="wp-num">WHITEPAPER 04</div>
+      <div class="wp-cover">表紙イメージ<br>（PDF・A4縦）</div>
+      <div class="wp-thumb-tag" style="background:#e65100;">生成AI導入</div>
+    </div>
+    <div class="wp-body">
+      <div class="wp-target">
+        <span class="target-badge" style="color:#e65100;background:#fff3e0;">経営者</span>
+        <span class="target-badge" style="color:#e65100;background:#fff3e0;">事業責任者</span>
+        <span class="target-badge" style="color:#e65100;background:#fff3e0;">IT担当</span>
+      </div>
+      <div class="wp-title">中小・中堅企業のための<br>生成AI導入ロードマップ</div>
+      <div class="wp-subtitle">失敗しない導入ステップと、マーケ活用の実践例</div>
+      <div class="wp-desc">
+        「AIを使いたいが、何から始めればいい？」という経営者・担当者向けのスターターガイドです。
+        生成AI導入の落とし穴から、業務活用の具体例、段階的な導入ステップまでを
+        現場目線で解説します。
+        <ul class="wp-contents">
+          <li>生成AI導入で失敗する企業の共通パターン</li>
+          <li>マーケティング業務への生成AI活用 8つの実践例</li>
+          <li>社内定着させるための運用ルール設計</li>
+          <li>フェーズ別 生成AI導入ロードマップ（テンプレ付き）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wp-form-panel">
+      <div class="form-title">無料でダウンロードする</div>
+      <div class="form-sub">ご登録後すぐにPDFをご覧いただけます。</div>
+      <div class="form-field">
+        <label>会社名 <span class="req">*</span></label>
+        <input type="text" placeholder="株式会社〇〇">
+      </div>
+      <div class="form-field">
+        <label>お名前 <span class="req">*</span></label>
+        <input type="text" placeholder="山田 太郎">
+      </div>
+      <div class="form-field">
+        <label>メールアドレス <span class="req">*</span></label>
+        <input type="email" placeholder="taro@example.com">
+      </div>
+      <button class="btn-download" style="background:#3a2000;">ダウンロード →</button>
+      <div class="form-note">送信することでプライバシーポリシーに<br>同意したものとみなします。</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <h3>安心してご利用ください</h3>
+  <p>入力いただいた情報はBRAIDEAからのご連絡以外には使用しません</p>
+  <div class="trust-items">
+    <div class="trust-item"><span class="trust-icon">🔒</span> SSL暗号化通信</div>
+    <div class="trust-item"><span class="trust-icon">📧</span> スパムメールは一切送信しません</div>
+    <div class="trust-item"><span class="trust-icon">🚫</span> 第三者への情報提供なし</div>
+    <div class="trust-item"><span class="trust-icon">📄</span> プライバシーポリシーに準拠</div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<section class="bottom-cta">
+  <h2>資料を読んで、もっと詳しく聞きたい方へ</h2>
+  <p>貴社の課題に合わせた具体的なご提案を、無料でご説明します。</p>
+  <div class="cta-buttons">
+    <a href="#" class="btn-dark">無料相談を申し込む</a>
+    <a href="services.html" class="btn-outline">サービス一覧を見る</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">BRAIDEA</div>
+    <p style="margin-top: 8px;">© 2025 BRAIDEA Inc. All rights reserved.</p>
+  </div>
+  <div>
+    <a href="#">プライバシーポリシー</a>
+    <a href="company.html">会社概要</a>
+    <a href="services.html">サービス</a>
+    <a href="cases.html">支援事例</a>
+  </div>
+</footer>
+
+</body>
+</html>
