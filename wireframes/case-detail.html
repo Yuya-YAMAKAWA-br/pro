@@ -4,41 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BRAIDEA - 支援事例詳細 ワイヤーフレーム</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
-
-    .wireframe-note {
-      background: #FFFDE7;
-      border: 2px dashed #FFC107;
-      padding: 16px 24px;
-      font-size: 13px;
-      color: #795548;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 9999;
-    }
-    .wireframe-note strong { color: #E65100; }
-
-    /* HEADER */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 48px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #eee;
-    }
-    .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
-    nav a { margin-left: 32px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
-    nav a:hover { color: #1a1a2e; }
-    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; }
-
     /* BREADCRUMB */
     .breadcrumb {
       padding: 120px 48px 0;
@@ -341,38 +308,7 @@
     .related-client { font-size: 11px; color: #999; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
     .related-title { font-size: 14px; font-weight: 700; color: #1a1a2e; line-height: 1.4; }
 
-    /* BOTTOM CTA */
-    .bottom-cta {
-      background: #1a1a2e;
-      padding: 80px 48px;
-      text-align: center;
-      color: #fff;
-    }
-    .bottom-cta h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
-    .bottom-cta p { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 36px; }
-    .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    .btn-white { background: #fff; color: #1a1a2e; padding: 16px 40px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; }
-    .btn-outline-white { border: 2px solid rgba(255,255,255,0.5); color: #fff; padding: 16px 40px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none; }
-
-    /* FOOTER */
-    footer {
-      background: #111;
-      color: rgba(255,255,255,0.5);
-      padding: 40px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; color: #fff; }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
-    footer a:hover { color: #fff; }
-
     @media (max-width: 768px) {
-      header { padding: 16px 24px; }
-      nav a { display: none; }
       .case-hero { padding: 32px 24px 48px; }
       .key-visual { padding: 0 24px; }
       .content-wrap { padding: 0 24px; }

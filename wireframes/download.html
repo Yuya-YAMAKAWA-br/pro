@@ -4,67 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BRAIDEA - 資料ダウンロード ワイヤーフレーム</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
-
-    .wireframe-note {
-      background: #FFFDE7;
-      border: 2px dashed #FFC107;
-      padding: 16px 24px;
-      font-size: 13px;
-      color: #795548;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 9999;
-    }
-    .wireframe-note strong { color: #E65100; }
-
-    /* HEADER */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 48px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #eee;
-    }
-    .logo { font-size: 24px; font-weight: 700; letter-spacing: 2px; color: #1a1a2e; text-decoration: none; }
-    nav a { margin-left: 32px; text-decoration: none; color: #555; font-size: 14px; font-weight: 500; }
-    nav a:hover { color: #1a1a2e; }
-    .nav-cta { background: #1a1a2e; color: #fff !important; padding: 10px 24px; border-radius: 6px; font-weight: 600; }
-
-    /* PAGE HERO */
-    .page-hero {
-      padding: 160px 48px 80px;
-      text-align: center;
-      background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
-    }
-    .page-hero .label {
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 12px;
-    }
-    .page-hero h1 {
-      font-size: 40px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 16px;
-    }
-    .page-hero p {
-      font-size: 17px;
-      color: #666;
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
+    /* PAGE HERO — download version (text-align: center) */
+    .page-hero { text-align: center; }
 
     /* WHITEPAPERS SECTION */
     .wp-section {
@@ -300,48 +243,12 @@
       font-size: 18px;
     }
 
-    /* BOTTOM CTA */
+    /* BOTTOM CTA — download version (light bg) */
     .bottom-cta {
-      padding: 80px 48px;
-      text-align: center;
       background: #f8f9fa;
     }
-    .bottom-cta h2 { font-size: 28px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
-    .bottom-cta p { font-size: 16px; color: #888; margin-bottom: 36px; }
-    .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
-    .btn-dark {
-      display: inline-block;
-      background: #1a1a2e; color: #fff;
-      padding: 16px 40px; border-radius: 8px;
-      font-size: 15px; font-weight: 700; text-decoration: none;
-    }
-    .btn-outline {
-      display: inline-block;
-      border: 2px solid #1a1a2e; color: #1a1a2e;
-      padding: 16px 40px; border-radius: 8px;
-      font-size: 15px; font-weight: 700; text-decoration: none;
-    }
-
-    /* FOOTER */
-    footer {
-      background: #111;
-      color: rgba(255,255,255,0.5);
-      padding: 40px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .footer-logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; color: #fff; }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
-    footer a:hover { color: #fff; }
 
     @media (max-width: 900px) {
-      header { padding: 16px 24px; }
-      nav a { display: none; }
-      .page-hero { padding: 120px 24px 60px; }
       .wp-section { padding: 0 24px 80px; }
       .wp-card {
         grid-template-columns: 1fr;

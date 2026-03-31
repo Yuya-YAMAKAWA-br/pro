@@ -4,64 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BRAIDEA - トップページ ワイヤーフレーム</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", sans-serif; color: #333; background: #fff; }
-
-    /* ============================
-       ANNOTATION
-    ============================ */
-    .wireframe-note {
-      background: #FFFDE7;
-      border: 2px dashed #FFC107;
-      padding: 16px 24px;
-      margin: 0;
-      font-size: 13px;
-      color: #795548;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 9999;
-    }
-    .wireframe-note strong { color: #E65100; }
-
-    /* ============================
-       HEADER / NAV
-    ============================ */
-    header {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 48px;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid #eee;
-    }
-    .logo {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #1a1a2e;
-    }
-    nav a {
-      margin-left: 32px;
-      text-decoration: none;
-      color: #555;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    nav a:hover { color: #1a1a2e; }
-    .nav-cta {
-      background: #1a1a2e;
-      color: #fff !important;
-      padding: 10px 24px;
-      border-radius: 6px;
-      font-weight: 600;
-    }
-
     /* ============================
        HERO - VIDEO BACKGROUND
     ============================ */
@@ -153,23 +97,13 @@
     .btn-secondary:hover { border-color: #fff; }
 
     /* ============================
-       SECTIONS COMMON
+       SECTIONS COMMON (index overrides)
     ============================ */
-    section {
-      padding: 100px 48px;
-    }
     .section-label {
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
       color: #888;
-      margin-bottom: 12px;
     }
     .section-title {
       font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #1a1a2e;
     }
     .section-subtitle {
       font-size: 16px;
@@ -452,33 +386,9 @@
     }
 
     /* ============================
-       FOOTER
-    ============================ */
-    footer {
-      background: #111;
-      color: rgba(255,255,255,0.5);
-      padding: 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-    }
-    footer .footer-logo {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: 2px;
-    }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 24px; }
-    footer a:hover { color: #fff; }
-
-    /* ============================
        RESPONSIVE
     ============================ */
     @media (max-width: 768px) {
-      header { padding: 12px 20px; }
-      nav a { display: none; }
-      section { padding: 60px 20px; }
       .hero-content h1 { font-size: 28px; }
       .hero-content h1 span { font-size: 14px; }
       .problems-grid { grid-template-columns: 1fr; }
