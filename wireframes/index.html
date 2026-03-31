@@ -168,6 +168,8 @@
       text-align: left;
       transition: box-shadow 0.2s, transform 0.2s;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
     }
     .service-card:hover {
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
@@ -207,7 +209,8 @@
     }
     .service-link {
       display: inline-block;
-      margin-top: 16px;
+      margin-top: 20px;
+      align-self: flex-end;
       font-size: 13px;
       color: #1a1a2e;
       text-decoration: none;
