@@ -263,7 +263,7 @@ nav a:hover { color: var(--brand-dark); }
 .scope-check {
   width: 24px;
   height: 24px;
-  background: var(--brand-dark);
+  background: var(--brand-warm);
   color: #fff;
   border-radius: 50%;
   display: flex;
