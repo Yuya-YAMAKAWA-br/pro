@@ -319,12 +319,12 @@
     ============================ */
     .flow { text-align: center; }
     .flow-steps {
-      display: flex;
+      display: flex !important;
       justify-content: center;
-      gap: 16px;
+      align-items: stretch;
+      gap: 0;
       max-width: 1000px;
       margin: 0 auto;
-      position: relative;
     }
     .flow-step {
       flex: 1;
@@ -334,6 +334,7 @@
       text-align: center;
       position: relative;
     }
+    .flow-step:not(:last-child)::after { display: none; }
     .flow-step-num {
       width: 40px;
       height: 40px;
@@ -364,6 +365,7 @@
       color: #ccc;
       font-size: 24px;
       flex-shrink: 0;
+      padding: 0 4px;
     }
 
     /* ============================
