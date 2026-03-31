@@ -194,7 +194,7 @@ nav a:hover { color: var(--brand-dark); }
   font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--brand-accent);
+  color: var(--brand-warm);
   margin-bottom: 12px;
   font-weight: 600;
 }
@@ -294,9 +294,13 @@ nav a:hover { color: var(--brand-dark); }
 }
 .feature-card:hover { border-color: var(--brand-warm); }
 .feature-num {
-  font-size: 11px;
+  display: inline-block;
+  font-size: 10px;
   font-weight: 700;
-  color: var(--brand-accent);
+  color: #fff;
+  background: var(--brand-warm);
+  padding: 3px 10px;
+  border-radius: 20px;
   letter-spacing: 2px;
   margin-bottom: 12px;
 }

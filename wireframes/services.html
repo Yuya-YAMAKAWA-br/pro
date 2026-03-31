@@ -68,6 +68,12 @@
       text-align: center;
       transition: border-color 0.2s, transform 0.2s;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .overview-arm > div:last-child {
+      margin-top: auto;
+      padding-top: 16px;
     }
     .overview-arm:hover {
       border-color: #f97316;
@@ -86,7 +92,7 @@
     }
     .overview-arm .arm-num {
       display: inline-block;
-      background: #1a1a2e;
+      background: #f97316;
       color: #fff;
       width: 28px;
       height: 28px;
@@ -118,10 +124,14 @@
     }
     .service-text {}
     .service-text .num {
-      font-size: 12px;
+      display: inline-block;
+      font-size: 10px;
       font-weight: 700;
-      color: #4a6cf7;
-      letter-spacing: 2px;
+      color: #fff;
+      background: #f97316;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
       margin-bottom: 12px;
     }
     .service-text h2 {
@@ -152,7 +162,7 @@
     }
     .service-features li::before {
       content: "✓";
-      color: #4a6cf7;
+      color: #f97316;
       font-weight: 700;
     }
     .service-visual {
