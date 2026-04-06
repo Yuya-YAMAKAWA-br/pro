@@ -24,19 +24,6 @@
       inset: 0;
       background: linear-gradient(135deg, #0a0a1a 0%, #16213e 50%, #0f3460 100%);
       z-index: 0;
-      overflow: hidden;
-    }
-    .hero-video-placeholder iframe {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 177.78vh; /* 16:9 アスペクト比 */
-      height: 100vh;
-      min-width: 100%;
-      min-height: 56.25vw; /* 16:9 アスペクト比 */
-      transform: translate(-50%, -50%);
-      border: none;
-      pointer-events: none;
     }
     .hero-overlay {
       position: absolute;
@@ -444,11 +431,7 @@
 <!-- ========== HERO（背景動画） ========== -->
 <section class="hero">
   <div class="hero-video-placeholder">
-    <iframe
-      src="https://drive.google.com/file/d/1FqDuD0nrcYFry3K_qpowpWAtZRBUflPC/preview?autoplay=1&mute=1"
-      allow="autoplay; fullscreen"
-      allowfullscreen
-    ></iframe>
+    <!-- 動画はXserverに直置き後: <video autoplay muted loop playsinline src="assets/hero-bg.mp4"></video> -->
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
